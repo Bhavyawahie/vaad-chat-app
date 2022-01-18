@@ -6,7 +6,7 @@ const morgan = require('morgan')
 const colors = require('colors');
 
 const chats = require('./data/data')
-const {chatRoutes} = require('./routes/chatRoutes')
+const chatRoutes = require('./routes/chatRoutes')
 
 dotenv.config({path: './.env'})
 
