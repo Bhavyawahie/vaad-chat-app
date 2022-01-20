@@ -16,14 +16,18 @@ const userSchema = new mongoose.Schema({
     },
     displayPicture: {
         type: String,
-        required: [true, "Please upload a displayPicture for your profile"],
+        required: [true, "Please upload a Display Picture for your profile!"],
         default: 'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg'
+    },
+    isAppAdmin: {
+        type: Boolean,
+        default: false
     }
 }, {
     timestamps: true
 })
 
-userSchema.methods.matchPasswords = async function (enterPassword) {
+userSchema.methods.matchPasswords = async function (enterPassword) {  //schema.methods.nameoftheMethod = function () {}
     return bcrypt.compare(enterPassword, this.password)
 }
 
