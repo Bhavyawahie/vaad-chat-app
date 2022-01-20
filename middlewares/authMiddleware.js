@@ -22,8 +22,8 @@ const protect = asyncHandler(async (req, res, next) => {
     }
 })
 
-const isAdmin = (req, res, next) => {
-    if(req.user && req.user.isAdmin){
+const isAppAdmin = (req, res, next) => {
+    if(req.user && req.user.isAppAdmin){
         next()
     }
     else {
@@ -34,5 +34,5 @@ const isAdmin = (req, res, next) => {
 
 module.exports = {
     protect,
-    isAdmin
+    isAppAdmin
 }
