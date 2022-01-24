@@ -1,25 +1,22 @@
 const asyncHandler = require('express-async-handler')
-const res = require('express/lib/response')
 const User = require('../models/userModel')
 const generateToken = require('../utils/generateToken')
 
-//  @desc:   Register a new user
-//  @route:  POST /api/users/
-//  @access: Public     
+// @desc:   Register a new user
+// @route:  POST /api/users/
+// @access: Public
 
-const register = asyncHandler(async () => {
+const register = asyncHandler(async (req, res) => {
     const {name, email, password} = req.body
     const existingUser = await User.findOne({email})
-    if(existingUser){
+    if (existingUser) {
         res.status(400)
         throw new Error('User already Exists!')
     }
 
-    const user = await User.create({
-        name, email, password
-    })
+    const user = await User.create({name, email, password})
 
-    if(user) {
+    if (user) {
         await user.save()
         res.status(200)
         res.json({
@@ -29,21 +26,20 @@ const register = asyncHandler(async () => {
             isAppAdmin: user.isAppAdmin,
             token: generateToken(user._id)
         })
-    }
-    else {
+    } else {
         res.status(400)
         throw new Error('Invalid user data!')
     }
 })
 
-//  @desc:   Authenticate already registered users
-//  @route:  POST /api/users/login
-//  @access: Public     
+// @desc:   Authenticate already registered users
+// @route:  POST /api/users/login
+// @access: Public
 
-const authUser = asyncHandler(async () => {
+const authUser = asyncHandler(async (req, res) => {
     const {email, password} = req.body
     const user = await User.findOne({email})
-    if(user && await user.matchPasswords(password)){
+    if (user && await user.matchPasswords(password)) {
         res.status(200).json({
             name: user.name,
             email: user.email,
@@ -56,7 +52,48 @@ const authUser = asyncHandler(async () => {
     }
 })
 
+// @desc:   Search Through the Database for a user using Name/Email via query params
+// @route:  GET /api/users/
+// @access: Protected
+
+const allUsers = asyncHandler(async (req, res) => {
+    const search = req.query.search ? {
+        $and: [
+            {
+                $or: [
+                    {
+                        name: {
+                            $regex: req.query.searchKeyword,
+                            $options: "i"
+                        }
+                    }, {
+                        email: {
+                            $regex: req.query.searchKeyword,
+                            $options: "i"
+                        }
+                    }
+                ]
+            }, 
+            
+            {
+                _id: {$ne: req.user._id}
+            }
+        ]
+    } : {}
+
+    const users = await User.find(search).select('-password')
+    if (users) {
+        res.status(201).json(users)
+    } else {
+        res.status(404)
+        throw new Error('User not found')
+    }
+
+
+})
+
 module.exports = {
     register,
-    authUser
+    authUser,
+    allUsers
 }
