@@ -14,7 +14,7 @@ const messageSchema = new mongoose.Schema({
     chat: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Chat',
-        required: true
+        required: [true, "chatId required!"]
     }
 }, {
     timestamps: true

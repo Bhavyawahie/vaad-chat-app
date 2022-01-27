@@ -11,8 +11,9 @@ require('colors');
 const connectDB = require('./config/db')
 
 const chats = require('./data/data')
-const chatRoutes = require('./routes/chatRoutes')
 const userRoutes = require('./routes/userRoutes');
+const chatRoutes = require('./routes/chatRoutes')
+const messageRoutes = require('./routes/messageRoutes')
 const { notFound, errorHandler } = require('./middlewares/errorMiddlware');
 
 dotenv.config({path: './.env'})
@@ -28,6 +29,7 @@ if(process.env.NODE_ENV === 'development') {
 
 app.use('/api/users', userRoutes)
 app.use('/api/chats', chatRoutes)
+app.use('/api/messages', messageRoutes)
 app.use(notFound)
 app.use(errorHandler)
 
