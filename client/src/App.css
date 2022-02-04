@@ -13,3 +13,9 @@
   flex-direction: column;
 }
 
+.rainbow {
+  background: linear-gradient(270deg, #4166FF, #FF5C87);
+  background-clip: text;
+  color: transparent;
+
+}

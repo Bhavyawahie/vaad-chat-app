@@ -1,15 +1,37 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Header from '../components/Header'
 import { Box, Button, Container, Flex, Heading, Image, Input, Spacer, Stack, VStack } from '@chakra-ui/react'
 import image from '../image.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../actions/userActions'
 
 
-const homeScreen = ({history, location}) => {
-    // useEffect(() => {
-    //     if(userInfo){
-    //         history.push('/chats')
-    //     }
-    // }, [userInfo, history])
+const HomeScreen = ({history, location}) => {
+    const [input, setInput] = useState({
+        email: "",
+        password: ""
+    })
+    const dispatch = useDispatch()
+    const userLogin = useSelector(state => state.userLogin)
+    const {loading, userInfo, error} = userLogin
+    const changeHandler = (e) => {
+        const {name, value} = e.target
+        setInput(prevVal => {
+            return {
+                ...prevVal,
+                [name]: value
+            }
+        })
+    }
+    const submitHandler = (e) => {
+        e.preventDefault()
+        dispatch(login(input))
+    }
+    useEffect(() => {
+        if(userInfo){
+            history.push('/chats')
+        }
+    }, [userInfo, history]);
     return (
         <>
             <Header location={location}/>
@@ -18,19 +40,19 @@ const homeScreen = ({history, location}) => {
                     <Flex>
                         <Flex flexDirection="column">
                             <Box mt={16} ml={10}>
-                                <Heading as='h1' size="4xl">
+                                <Heading as='h1' size="4xl" className='rainbow' pb={4}>
                                     Hang out,<br /> anytime, <br /> anywhere    
                                 </Heading>
                             </Box>
                             <Box mt={12} ml={10}>
                                 <VStack>
-                                    <Input placeholder='Email Address'type="email" borderRadius="xl" variant="filled" />
-                                    <Input placeholder='Password' type="password" borderRadius="xl" variant="filled" />
+                                    <Input placeholder='Email Address' type="email" borderRadius="xl" variant="filled" name="email" value={input.email} onChange={changeHandler} />
+                                    <Input placeholder='Password' type="password" borderRadius="xl" variant="filled" name="password" value={input.password} onChange={changeHandler} />
                                 </VStack>
                             </Box>
                             <Flex mt={4} ml={10}>
                                 <Box>
-                                    <Button bg="#9F08FF" color='white' borderRadius="2xl">Login</Button>
+                                    <Button bg="#9F08FF" color='white' borderRadius="2xl" onClick={submitHandler}>Login</Button>
                                 </Box>
                             </Flex>
                         </Flex>
@@ -45,4 +67,4 @@ const homeScreen = ({history, location}) => {
     )
 }
 
-export default homeScreen
+export default HomeScreen
