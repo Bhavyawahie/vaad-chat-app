@@ -1,16 +1,20 @@
 import React from 'react'
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import registerScreen from './Screens/registerScreen'
-import homeScreen from './Screens/homeScreen'
-import chatScreen from './Screens/chatScreen'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import RegisterScreen from './Screens/RegisterScreen'
+import HomeScreen from './Screens/HomeScreen'
+import ChatScreen from './Screens/ChatScreen'
+import Notfound from './components/NotFound';
 
 const App = () => {
     return (
         <Router>
-            <Route exact path="/register" component={registerScreen}/>
-            <Route exact path="/" component={homeScreen}/>
-            <Route exact path="/chats" component={chatScreen}/>
+            <Switch>
+                <Route exact path="/register" component={RegisterScreen}/>
+                <Route exact path="/" component={HomeScreen}/>
+                <Route exact path="/chats" component={ChatScreen}/>
+                <Route component={Notfound}/>
+            </Switch>
         </Router>
     );
 }
