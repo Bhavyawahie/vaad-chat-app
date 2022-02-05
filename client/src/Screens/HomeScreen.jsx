@@ -52,7 +52,7 @@ const HomeScreen = ({history, location}) => {
                             </Box>
                             <Flex mt={4} ml={10}>
                                 <Box>
-                                    <Button bg="#9F08FF" color='white' borderRadius="2xl" onClick={submitHandler}>Login</Button>
+                                    <Button isLoading={loading && true} bg="#9F08FF" color='white' borderRadius="2xl" onClick={submitHandler}>Login</Button>
                                 </Box>
                             </Flex>
                         </Flex>
