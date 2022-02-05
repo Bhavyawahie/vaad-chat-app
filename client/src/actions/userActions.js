@@ -35,14 +35,14 @@ export const register = (input) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        const res = await axios.post('api/user', input, config)
+        const res = await axios.post('/api/users', input, config)
         dispatch({type: USER_REGISTER_SUCCESS, payload: res.data})
         dispatch({type: USER_LOGIN_SUCCESS, payload: res.data})
         localStorage.setItem('userInfo', JSON.stringify(res.data))
     } catch (error) {
         dispatch({
             type: USER_REGISTER_FAIL,
-            payload: error.messsage && error.response.data.message ? error.response.data.message : error.message
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
 }
