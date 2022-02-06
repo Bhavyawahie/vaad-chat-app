@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import Header from '../components/Header'
-import { Box, Button, Container, Flex, Heading, Image, Input, Spacer, Stack, VStack } from '@chakra-ui/react'
+import { Box, Button, Container, Flex, Heading, Image, Input, Spacer, Stack, useToast, VStack } from '@chakra-ui/react'
 import image from '../image.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../actions/userActions'
 
 
 const HomeScreen = ({history, location}) => {
+    const toast = useToast()
     const [input, setInput] = useState({
         email: "",
         password: ""
@@ -35,6 +36,7 @@ const HomeScreen = ({history, location}) => {
     return (
         <>
             <Header location={location}/>
+            {error && toast({position: "top-right", title: `${error}`, status: "error", isClosable: true, duration: "4000"})}
             <Flex>
                 <Container maxW="container.xl" mt={4}>
                     <Flex>
