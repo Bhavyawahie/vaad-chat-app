@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Search2Icon, SearchIcon } from "@chakra-ui/icons";
-import { Box, Button, Container, Flex, Heading, Image, Input, InputGroup, InputLeftElement, Menu, MenuButton, MenuGroup, MenuItem, MenuList, Spacer, Text } from "@chakra-ui/react";
+import { Avatar, Box, Button, Container, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Heading, Image, Input, InputGroup, InputLeftElement, Menu, MenuButton, MenuGroup, MenuItem, MenuList, Spacer, Text, useDisclosure } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
+import Sidebarprofile from "../components/SidebarProfile";
 
 const Chatscreen = ({ history }) => {
+    const {isOpen, onOpen, onClose} = useDisclosure()
+    const btnRef = useRef()
     const localSearchInput = useRef(null)
     const dispatch = useDispatch();
     const userLogin = useSelector((state) => state.userLogin);
@@ -27,10 +30,11 @@ const Chatscreen = ({ history }) => {
                     <Container py={2}>
                         <Flex flexDirection="row">
                             <Box py={1} pr={2}>
-                                <Image src="https://www.clevelanddentalhc.com/wp-content/uploads/2018/03/sample-avatar.jpg" boxSize="40px" borderRadius="50%"/>
+                                    <Avatar as='button' name="sample user" src="https://www.clevelanddentalhc.com/wp-content/uploads/2018/03/sample-avatar.jpg" boxSize="40px" borderRadius="50%" onClick={onOpen} _focus={{outline: 'none'}}/>            
                             </Box>
                             <Heading size="lg" py={1}>Chats</Heading>
                             <Spacer/>
+                            <Button onClick={logoutHandler}>Test</Button>
                             <Box>
                                 <Flex p={2}>
                                     <Menu borderRadius="50%">
@@ -43,12 +47,12 @@ const Chatscreen = ({ history }) => {
                                     </Menu>
                                 </Flex>
                             </Box>
-                            <Button onClick={logoutHandler}>Test</Button>
                         </Flex>
                     </Container>
+                    <Sidebarprofile isOpen={isOpen} onClose={onClose} btnRef={btnRef}/>
                     <Container>
                         <InputGroup my={2} variant='filled'>
-                            <InputLeftElement borderRadius="25px"><Button variant="flush" onClick={searchButtonClickHandler}><SearchIcon color="blackAlpha.400"/></Button></InputLeftElement>
+                            <InputLeftElement borderRadius="25px"><Button variant="flush" onClick={searchButtonClickHandler} _focus={{outline: "none"}}><SearchIcon color="blackAlpha.400"/></Button></InputLeftElement>
                             <Input ref={localSearchInput} placeholder="Search" borderRadius="25px"/>
                         </InputGroup>
                     </Container>
