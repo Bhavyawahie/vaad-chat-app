@@ -6,10 +6,9 @@ import Sidebarprofile from "../components/SidebarProfile";
 import SidebarCreateChat from "../components/SidebarCreateChat";
 
 const Chatscreen = ({ history }) => {
+    const avatarIconURL = "https://www.clevelanddentalhc.com/wp-content/uploads/2018/03/sample-avatar.jpg"
     const {isOpen, onOpen, onClose} = useDisclosure()
     const {isOpen: isOpenCreateChat, onOpen: onOpenCreateChat, onClose: onCloseCreateChat} = useDisclosure()
-    const btnRef = useRef()
-    const btnRef2 = useRef()
     const localSearchInput = useRef(null)
     const dispatch = useDispatch();
     const userLogin = useSelector((state) => state.userLogin);
@@ -33,7 +32,7 @@ const Chatscreen = ({ history }) => {
                     <Container py={2}>
                         <Flex flexDirection="row">
                             <Box py={1} pr={2}>
-                                    <Avatar as='button' name="sample user" src="https://www.clevelanddentalhc.com/wp-content/uploads/2018/03/sample-avatar.jpg" boxSize="40px" borderRadius="50%" onClick={onOpen} _focus={{outline: 'none'}}/>            
+                                    <Avatar as='button' name="sample user" src={avatarIconURL} boxSize="40px" borderRadius="50%" onClick={onOpen} _focus={{outline: 'none'}}/>            
                             </Box>
                             <Heading d={{base: "none", lg: "flex"}} size="lg" py={1}>Chats</Heading>
                             <Spacer/>
@@ -60,8 +59,8 @@ const Chatscreen = ({ history }) => {
                     </Container>
                 </Flex>
             </Box>
-                    <Sidebarprofile isOpen={isOpen} onClose={onClose} btnRef={btnRef}/>
-                    <SidebarCreateChat isOpenCreateChat={isOpenCreateChat} onCloseCreateChat={onCloseCreateChat} btnRef2={btnRef2}/>
+                    <Sidebarprofile isOpen={isOpen} onClose={onClose}/>
+                    <SidebarCreateChat isOpenCreateChat={isOpenCreateChat} onCloseCreateChat={onCloseCreateChat}/>
             <Box bg="white" w="75%" minWidth="50%" borderLeft="1px solid rgb(229,229,229)">
                 <Text>Box 2</Text>
             </Box>
