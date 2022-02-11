@@ -81,7 +81,7 @@ const allUsers = asyncHandler(async (req, res) => {
         ]
     } : {}
 
-    const users = await User.find(search).select('-password')
+    const users = await User.find(search).select('-password').sort('name')
     if (users) {
         res.status(201).json(users)
     } else {
