@@ -9,7 +9,6 @@ const chatSchema = new mongoose.Schema({
     users: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'User is required to initiate the chat!']
     }],
     lastMessage: {
         type: mongoose.Schema.Types.ObjectId,
