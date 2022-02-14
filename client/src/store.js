@@ -1,13 +1,15 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import { chatOneToOneCreateReducer, chatOneToOneListReducer } from './reducers/chatReducers'
+import { chatAllListReducer, chatCurrentSetReducer, chatOneToOneCreateReducer, chatOneToOneListReducer } from './reducers/chatReducers'
 import { userLoginReducer, userRegisterReducer, userSearchReducer } from './reducers/userReducer'
 
 const reducers = combineReducers({
     userRegister: userRegisterReducer,
     userLogin: userLoginReducer,
     userSearch: userSearchReducer,
+    chatCurrentSet: chatCurrentSetReducer,
+    chatAllList: chatAllListReducer,
     chatOneToOneCreate: chatOneToOneCreateReducer,
     chatOneToOneList: chatOneToOneListReducer
 })
@@ -17,7 +19,7 @@ const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localS
 const initialState = {
     userLogin: {
         userInfo : userInfoFromStorage
-    }
+    },
 }
 
 const middleware = [thunk]

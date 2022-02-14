@@ -14,8 +14,6 @@ const SidebarCreateChat = ({isOpenCreateChat, onCloseCreateChat}) => {
     const dispatch = useDispatch()
     const userSearch = useSelector(state => state.userSearch)
     const { loading, users, error } = userSearch 
-    const chatOneToOneCreate = useSelector(state => state.chatOneToOneCreate)
-    const {loading: createChatLoading, chat, error: createChatError} = chatOneToOneCreate
     const inputHandler = (e) => {
         setSearch(e.target.value)
     }
@@ -24,7 +22,6 @@ const SidebarCreateChat = ({isOpenCreateChat, onCloseCreateChat}) => {
         onCloseCreateChat()
         dispatch({type: USER_SEARCH_RESET})
     }
-    console.log(createChatError)
     useEffect(() => {
         if(search !== "") {
             dispatch(searchUser(search))
