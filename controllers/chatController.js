@@ -19,11 +19,12 @@ const accessChat = asyncHandler(async (req, res) => {
     if(existingChat) {
         res.status(400)
         throw new Error('Chat already exists!')
-    }   
+    } 
+    const reciever = await User.findById(req.body.userId)  
     const chat = await Chat.create({
         isGroupChat: false,
         users: [req.body.userId, req.user._id],
-        chatName: "Sender"
+        chatName: `${reciever.name}`
     })
     const fullChat = await Chat.findById(chat._id).populate('users', '-password')    
     res.status(200).json(fullChat) 
