@@ -55,7 +55,7 @@ export const createOneToOneChat = (userId) => async (dispatch, getState) => {
     }
 }
 
-export const fetchAllChats = () => async (dispatch, getState) => {
+export const fetchAllChats = (search) => async (dispatch, getState) => {
     try {
         dispatch({
             type: CHAT_ALL_LIST_REQUEST
@@ -67,14 +67,27 @@ export const fetchAllChats = () => async (dispatch, getState) => {
             }
         }
         const res = await axios.get('/api/chats/all', config)
-        dispatch({
-            type: CHAT_ALL_LIST_SUCCESS,
-            payload: res.data
-        }) 
+        const chats = res.data
+        const filteredChats = chats.filter(chat => {
+            if(search !== ""){
+                return chat.chatName.toLowerCase().includes(search.toLowerCase())
+            }
+        })
+        if(search === ""){
+            dispatch({
+                type: CHAT_ALL_LIST_SUCCESS,
+                payload: res.data
+            }) 
+        } else {
+            dispatch({
+                type: CHAT_ALL_LIST_SUCCESS,
+                payload: filteredChats
+            }) 
+        }
     } catch (error) {
         dispatch({
             type: CHAT_ALL_LIST_FAIL,
-            payload: error.message && error.response.data.message
+            payload: error.message && error.response.data.message ? error.response.data.message : error.message
         })
     }
 } 
@@ -87,9 +100,7 @@ export const fetchAllChats = () => async (dispatch, getState) => {
 //         const {chatListAll: {chats}} = getState()
 //         if(query !== ''){
 //             const result = chats.filter(chat => {
-//                 if(chat.isGroupChat){
-//                     return
-//                 }
+//                 return chat.chatName.toLowerCase().includes(query.toLowerCase())
 //             })
 //             dispatch({
 //                 type: CHAT_ALL_LIST_SUCCESS,
@@ -104,7 +115,7 @@ export const fetchAllChats = () => async (dispatch, getState) => {
 //     } catch (error) {
 //         dispatch({
 //             type: CHAT_ALL_LIST_FAIL,
-//             payload: error.message && error.response.data.message
+//             payload: error.message && error.response.data.message ? error.response.data.message : error.message
 //         })
 //     }
 // }
