@@ -63,8 +63,8 @@ const fetchChats = asyncHandler(async (req, res) => {
     let chats = await Chat.find({users: {$elemMatch: {$eq: req.user._id}}}).populate('users', '-password').populate('groupAdmin', '-password').populate('lastMessage').sort({updatedAt: -1})
     if(chats.length > 0){
         chats = await User.populate(chats, {
-            path: 'latestMessage',
-            select: "name email displayPicture"
+            path: "lastMessage.sender",
+            select: "-password"
         })
         res.status(200)
         res.json(chats)
