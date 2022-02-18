@@ -2,6 +2,7 @@ import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { chatAllListReducer, chatCurrentSetReducer, chatOneToOneCreateReducer, chatOneToOneListReducer } from './reducers/chatReducers'
+import { messageListAllReducer, messageSendReducer } from './reducers/messageReducers'
 import { userLoginReducer, userRegisterReducer, userSearchReducer } from './reducers/userReducer'
 
 const reducers = combineReducers({
@@ -11,7 +12,9 @@ const reducers = combineReducers({
     chatCurrentSet: chatCurrentSetReducer,
     chatAllList: chatAllListReducer,
     chatOneToOneCreate: chatOneToOneCreateReducer,
-    chatOneToOneList: chatOneToOneListReducer
+    chatOneToOneList: chatOneToOneListReducer,
+    messageListAll: messageListAllReducer,
+    messageSend: messageSendReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
