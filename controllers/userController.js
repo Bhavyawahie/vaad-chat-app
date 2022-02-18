@@ -24,6 +24,7 @@ const register = asyncHandler(async (req, res) => {
             name: user.name,
             email: user.email,
             isAppAdmin: user.isAppAdmin,
+            displayPicture: user.displayPicture,
             token: generateToken(user._id)
         })
     } else {
@@ -44,6 +45,7 @@ const authUser = asyncHandler(async (req, res) => {
             name: user.name,
             email: user.email,
             isAppAdmin: user.isAppAdmin,
+            displayPicture: user.displayPicture,
             token: generateToken(user._id)
         })
     } else {

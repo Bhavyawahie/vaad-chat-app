@@ -1,8 +1,11 @@
 import axios from 'axios'
+import { CHAT_CURRENT_RESET } from '../constants/chatConstants'
+import { MESSAGE_ALL_LIST_RESET } from '../constants/messageConstants'
 import {
     USER_LOGIN_FAIL,
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
+    USER_LOGOUT,
     USER_REGISTER_FAIL,
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
@@ -50,6 +53,19 @@ export const register = (input) => async (dispatch) => {
     }
 }
 
+export const logout = () => (dispatch) => {
+    localStorage.removeItem('userInfo')
+    dispatch({
+        type: USER_LOGOUT
+    })
+    dispatch({
+        type: CHAT_CURRENT_RESET
+    })
+    dispatch({
+        type: MESSAGE_ALL_LIST_RESET
+    })
+}
+
 export const searchUser = (searchQuery) => async (dispatch, getState) => {
     try {
         dispatch({
@@ -72,5 +88,4 @@ export const searchUser = (searchQuery) => async (dispatch, getState) => {
             payload: error.message && error.response.data.message ? error.response.data.message : error.message
         })
     }
-
 }
