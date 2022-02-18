@@ -1,56 +1,40 @@
 import React, { useState, useEffect, useRef } from "react";
-import Picker from 'emoji-picker-react';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
-import { EditIcon, Search2Icon, SearchIcon } from "@chakra-ui/icons";
 import { Avatar, Box, Button, Container, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Heading, Icon, Image, Input, InputGroup, InputLeftElement, Menu, MenuButton, MenuGroup, MenuItem, MenuList, Spacer, Text, useDisclosure, VStack } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
+import Box1 from "../components/Boxes/Box1";
+import Box2 from "../components/Boxes/Box2";
 import Sidebarprofile from "../components/SidebarProfile";
 import SidebarCreateChat from "../components/SidebarCreateChat";
-import { fetchAllChats, searchLocalUser } from "../actions/chatActions";
-import UserLoading from "../components/UserLoading";
-import ChatListItem from "../components/ChatListItem";
-import { CHAT_CURRENT_RESET, CHAT_CURRENT_SET } from "../constants/chatConstants";
 import SidebarCreateGroupChat from "../components/SidebarCreateGroupChat";
 
 const Chatscreen = ({ history }) => {
     const [sidebox, setSideBox] = useState(false)
-    const [localSearch, setLocalSearch] = useState("")
-    const localSearchInput = useRef(null)
-    const avatarIconURL = "https://www.clevelanddentalhc.com/wp-content/uploads/2018/03/sample-avatar.jpg"
-    const dispatch = useDispatch();
     const {isOpen, onOpen, onClose} = useDisclosure()
     const {isOpen: isOpenCreateChat, onOpen: onOpenCreateChat, onClose: onCloseCreateChat} = useDisclosure()
     const {isOpen: isOpenCreateGroupChat, onOpen: onOpenCreateGroupChat, onClose: onCloseCreateGroupChat} = useDisclosure()
+    const dispatch = useDispatch();
     const userLogin = useSelector((state) => state.userLogin);
     const { userInfo } = userLogin
-    const chatAllList = useSelector(state => state.chatAllList)
-    const { loading, chats, error } = chatAllList
-    const chatOneToOneCreate = useSelector(state => state.chatOneToOneCreate)
-    const {loading: createChatLoading, chat: createdChat, error: createChatError} = chatOneToOneCreate
-    const chatCurrentSet = useSelector(state => state.chatCurrentSet)
-    const { currentChat } = chatCurrentSet
     useEffect(() => {
         if (!userInfo) {
             history.push("/")
         } 
-        dispatch(fetchAllChats(localSearch))
-    }, [userInfo, history, createdChat, localSearch])
-    const logoutHandler = () => {
-        console.log('i was clicked!')
-    }
-    const searchButtonClickHandler = () => {
-        localSearchInput.current.focus()
-    }
-    const chatOpener = (userId) => {
-        dispatch({type: CHAT_CURRENT_RESET})
-        dispatch({type: CHAT_CURRENT_SET, payload: chats.find(chat => chat._id === userId)})
-    }
-    console.log(currentChat)
+    }, [userInfo, history])
     return (
     <>
         <Flex height='100vh'>
-            <Box w="25%" minWidth='25%'>
+            <Box1
+                isOpen={isOpen} 
+                onOpen={onOpen} 
+                onClose={onClose}
+                isOpenCreateChat={isOpenCreateChat}
+                onOpenCreateChat={onOpenCreateChat}
+                onCloseCreateChat={onCloseCreateChat}
+                isOpenCreateGroupChat={isOpenCreateGroupChat}
+                onOpenCreateGroupChat={onOpenCreateGroupChat}
+                onCloseCreateGroupChat={onCloseCreateGroupChat}
+            />
+            {/* <Box w="25%" minWidth='25%'>
                 <Flex flexDirection="column" mt={2}>
                     <Container py={2}>
                         <Flex flexDirection="row">
@@ -96,11 +80,12 @@ const Chatscreen = ({ history }) => {
                             )}
                     </VStack>        
                 </Flex>
-            </Box>
+            </Box> */}
             <Sidebarprofile isOpen={isOpen} onClose={onClose}/>
             <SidebarCreateChat isOpenCreateChat={isOpenCreateChat} onCloseCreateChat={onCloseCreateChat}/>
             <SidebarCreateGroupChat isOpenCreateGroupChat={isOpenCreateGroupChat} onCloseCreateGroupChat={onCloseCreateGroupChat}/>
-            <Box bg="white" w="75%" minWidth="50%" borderLeft="1px solid rgb(229,229,229)">
+            <Box2 setSideBox={setSideBox}/>
+            {/* <Box bg="white" w="75%" minWidth="50%" borderLeft="1px solid rgb(229,229,229)">
                 { currentChat ? (
                 <Flex flexDirection="column" justifyContent='stretch' height='100vh'>
                     <Flex height='8.4%' flexDirection="row" justifyContent="flex-start" borderBottom='1px solid rgb(229,229,229)' py={3}>
@@ -119,7 +104,7 @@ const Chatscreen = ({ history }) => {
                     </Flex>
                 </Flex>)
                 : <Flex minHeight="100vh" justifyContent="center" alignItems="center" as='Text' fontSize="xl">Click on the chats to get started</Flex>}
-            </Box>
+            </Box> */}
             {sidebox && <Box bg="white" w='25%' minWidth="25%" >
                 <Text>Box 3</Text>
             </Box>}
