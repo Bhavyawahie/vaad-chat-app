@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon'
 import { Avatar, Box, Button, Flex, Icon, Input, Text } from '@chakra-ui/react'
-import { sendMessage } from '../../actions/messageActions'
+import { fetchAllMessages, sendMessage } from '../../actions/messageActions'
 
 const Box2 = ({setSideBox}) => {
     const [messageField, setMessageField] = useState("")
@@ -11,11 +11,18 @@ const Box2 = ({setSideBox}) => {
     const {loading, message, error} = messageSend
     const chatCurrentSet = useSelector(state => state.chatCurrentSet)
     const {currentChat} = chatCurrentSet
+    const messageListAll = useSelector(state => state.messageListAll)
+    const {loading: loadingMessage, messages, error: errorMessage } = messageListAll
     const sendMessageHandler = () => {
         dispatch(sendMessage(currentChat._id, messageField))
         setMessageField("")
     }
-    console.log(message)
+    useEffect(() => {
+        if(currentChat){
+            dispatch(fetchAllMessages(currentChat._id))
+        }
+    }, [currentChat])
+    console.log(messages)
     return (
         <Box bg="white" w="75%" minWidth="50%" borderLeft="1px solid rgb(229,229,229)">
                 { currentChat ? (
