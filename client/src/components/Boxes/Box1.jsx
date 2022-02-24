@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { CHAT_CURRENT_RESET, CHAT_CURRENT_SET } from '../../constants/chatConstants'
 import { fetchAllChats } from '../../actions/chatActions'
 import { logout } from '../../actions/userActions'
+import { getReciever } from '../../utils/chatLogics'
 
 const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCloseCreateChat, isOpenCreateGroupChat, onOpenCreateGroupChat, onCloseCreateGroupChat}) => {
     const avatarIconURL = "https://www.clevelanddentalhc.com/wp-content/uploads/2018/03/sample-avatar.jpg"
@@ -74,8 +75,8 @@ const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCl
                                     <ChatListItem
                                         key={chat._id}
                                         id={chat._id}
-                                        name={chat.chatName}
-                                        displayPicture={chat.users[0].displayPicture}
+                                        name={chat.isGroupChat ? chat.chatName : getReciever(userInfo, chat.users).name}
+                                        displayPicture={chat.isGroupChat? `https://nirc.icai.org/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/public/partials/images/default-group.png` : getReciever(userInfo, chat.users).displayPicture}
                                         lastMessage={chat.lastMessage ? chat.isGroupChat ? `${chat.lastMessage.sender.name}: ${chat.lastMessage.content}`: chat.lastMessage.content : null}
                                         timeStamp={chat.lastMessage ? chat.lastMessage.createdAt : ""}
                                         initiateChat={chatOpener}
