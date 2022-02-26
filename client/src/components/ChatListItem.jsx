@@ -1,5 +1,5 @@
-import { Avatar, Box, Flex, Spacer, Text } from '@chakra-ui/react'
 import React from 'react'
+import { Avatar, Box, Flex, Spacer, Text } from '@chakra-ui/react'
 
 const ChatListItem = ({id, name, displayPicture, lastMessage, timeStamp, initiateChat}) => {
     return (
@@ -13,7 +13,7 @@ const ChatListItem = ({id, name, displayPicture, lastMessage, timeStamp, initiat
                         <Spacer/>
                         <Box fontSize="xs" color="blackAlpha.400">{timeStamp.split('.')[0]}</Box>
                     </Flex>
-                    <Text fontSize="sm" color="blackAlpha.600">{lastMessage}</Text>
+                    <Text fontSize="sm" color="blackAlpha.800">{lastMessage}</Text>
                 </Box>
             </Flex>
     )
