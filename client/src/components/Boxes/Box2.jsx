@@ -40,7 +40,7 @@ const Box2 = ({setSideBox}) => {
                             </Flex>
                     </Flex>
                     <Flex height='83.4%' w='100%'>
-                        <Flex w="100%" h="100%" justifyContent='center' alignItems='center' flexDirection='column' alignItems='flex-end' overflowY="hidden">
+                        <Flex w="100%" h="100%" flexDirection='column' overflowY="hidden">
                             {loadingMessage ? <span>loading</span> : <MessageScrollList/>}
                         </Flex>
                     </Flex>
