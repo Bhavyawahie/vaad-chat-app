@@ -23,3 +23,7 @@
   background-clip: text;
   color: transparent;
 }
+
+.messageScrollList {
+  padding: 0 48px;
+}
