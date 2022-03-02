@@ -27,9 +27,6 @@ export const fetchAllMessages = (chatId) => async (dispatch, getState) => {
 
 export const sendMessage = (chatId, content) => async (dispatch, getState) => {
     try {
-        dispatch({
-            type: MESSAGE_SEND_REQUEST
-        })
         const {userLogin: {userInfo}} = getState()
         const config = {
             headers: {
@@ -40,6 +37,10 @@ export const sendMessage = (chatId, content) => async (dispatch, getState) => {
         const res = await axios.post(`/api/messages/`, {chatId, content} , config)
         dispatch({
             type: MESSAGE_SEND_SUCCESS,
+            payload: res.data
+        })
+        dispatch({
+            type: MESSAGE_ALL_LIST_SUCCESS,
             payload: res.data
         })
     } catch (error) {

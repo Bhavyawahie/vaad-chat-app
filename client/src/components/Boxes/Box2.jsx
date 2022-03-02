@@ -13,7 +13,7 @@ const Box2 = ({setSideBox}) => {
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
     const messageSend = useSelector(state => state.messageSend)
-    const { messages: messageSent, error} = messageSend
+    const { message: messageSent, error} = messageSend
     const messageListAll = useSelector(state => state.messageListAll)
     const {loading: loadingMessage, error: errorMessage } = messageListAll
     const chatCurrentSet = useSelector(state => state.chatCurrentSet)
@@ -26,7 +26,7 @@ const Box2 = ({setSideBox}) => {
         if(currentChat){
             dispatch(fetchAllMessages(currentChat._id))
         }
-    }, [currentChat, messageSent])
+    }, [currentChat])
     return (
         <Box bg="white" w="75%" minWidth="50%" borderLeft="1px solid rgb(229,229,229)">
                 { currentChat ? (
