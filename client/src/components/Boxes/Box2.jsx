@@ -46,8 +46,8 @@ const Box2 = ({setSideBox}) => {
                     </Flex>
                     <Flex height='7.6%' px={2}>
                         <Button variant='flushed' _hover={{backgroundColor: "rgba(229,229,229)"}}><Icon as={InsertEmoticonIcon}/></Button>
-                        <Input placeholder="Type a Message" borderRadius='25px' w='90%' value={messageField} onChange={(e) => setMessageField(e.target.value)} onKeyPress={(e) => (e.key === 'Enter') && sendMessageHandler()}/>
-                        <Button onClick={sendMessageHandler}>Send</Button>
+                        <Input placeholder="Type a Message" borderRadius='25px' w='90%' value={messageField} onChange={(e) => setMessageField(e.target.value)} onKeyPress={(e) => (messageField.trim() !== ""  && e.key === 'Enter') && sendMessageHandler()}/>
+                        <Button onClick={sendMessageHandler} disabled={messageField === "" && true} >Send</Button>
                     </Flex>
                 </Flex>)
                 : <Flex minHeight="100vh" justifyContent="center" alignItems="center" as='Text' fontSize="xl">Click on the chats to get started</Flex>}
