@@ -21,13 +21,15 @@ const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCl
     const { loading, chats, error } = chatAllList
     const chatOneToOneCreate = useSelector(state => state.chatOneToOneCreate)
     const {loading: createChatLoading, chat: createdChat, error: createChatError} = chatOneToOneCreate
+    const messageSend = useSelector(state => state.messageSend)
+    const { message } = messageSend
     const chatCurrentSet = useSelector(state => state.chatCurrentSet)
     const { currentChat } = chatCurrentSet
     useEffect(() => {
         if(userInfo){
             dispatch(fetchAllChats(localSearch))
         }
-    }, [createdChat, localSearch])
+    }, [createdChat, localSearch, message])
     const logoutHandler = () => {
         dispatch(logout())
     }
