@@ -31,7 +31,7 @@ const Box2 = ({setSideBox}) => {
         <Box bg="white" w="75%" minWidth="50%" borderLeft="1px solid rgb(229,229,229)">
                 { currentChat ? (
                 <Flex flexDirection="column" justifyContent='stretch' height='100vh'>
-                    <Flex height='9%' flexDirection="row" justifyContent="flex-start" borderBottom='1px solid rgb(229,229,229)' py={3}>
+                    <Flex flexDirection="row" justifyContent="flex-start" borderBottom='1px solid rgb(229,229,229)' py={3}>
                             <Flex w='80%' ml={4} onClick={() => setSideBox(true) }>
                                 <Box>
                                     <Avatar src={currentChat.isGroupChat ? groupChatImgURL : getReciever(userInfo, currentChat.users).displayPicture} boxSize="2.5rem" borderRadius="50%"></Avatar>
@@ -44,10 +44,12 @@ const Box2 = ({setSideBox}) => {
                             {loadingMessage ? <span>loading</span> : <MessageScrollList/>}
                         </Flex>
                     </Flex>
-                    <Flex height='7.6%' px={2}>
-                        <Button variant='flushed' _hover={{backgroundColor: "rgba(229,229,229)"}}><Icon as={InsertEmoticonIcon}/></Button>
-                        <Input placeholder="Type a Message" borderRadius='25px' w='90%' value={messageField} onChange={(e) => setMessageField(e.target.value)} onKeyPress={(e) => (messageField.trim() !== ""  && e.key === 'Enter') && sendMessageHandler()}/>
-                        <Button onClick={sendMessageHandler} disabled={messageField === "" && true} >Send</Button>
+                    <Flex flexDirection='column' justifyContent='flex-end' mb={3}>
+                        <Flex px={2}>
+                            <Button variant='flushed' _hover={{backgroundColor: "rgba(229,229,229)"}}><Icon as={InsertEmoticonIcon}/></Button>
+                            <Input placeholder="Type a Message" borderRadius='25px' w='90%' value={messageField} onChange={(e) => setMessageField(e.target.value)} onKeyPress={(e) => (messageField.trim() !== ""  && e.key === 'Enter') && sendMessageHandler()}/>
+                            <Button onClick={sendMessageHandler} disabled={messageField === "" && true} >Send</Button>
+                        </Flex>
                     </Flex>
                 </Flex>)
                 : <Flex minHeight="100vh" justifyContent="center" alignItems="center" as='Text' fontSize="xl">Click on the chats to get started</Flex>}
