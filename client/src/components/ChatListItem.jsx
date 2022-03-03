@@ -9,7 +9,7 @@ const ChatListItem = ({id, name, displayPicture, lastMessage, timeStamp, initiat
                 </Box>
                 <Box as='Flex' justifyContent='center' width='500px'>
                     <Flex justifyContent="space-between">
-                        <Box fontSize="lg">{name}</Box>
+                        <Box fontSize="lg" isTruncated>{name}</Box>
                         <Spacer/>
                         <Box fontSize="xs" color="blackAlpha.400">{timeStamp.split('.')[0]}</Box>
                     </Flex>
