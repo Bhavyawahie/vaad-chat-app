@@ -34,6 +34,12 @@ input[type='file']{
 
 .icon-button-file-label {
   position: absolute;
+  border-radius: 50%;
+  width: 8rem;
+  height: 8rem;
   top: 0px;
-  right: 0px
+  right: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

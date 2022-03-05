@@ -8,6 +8,9 @@ const Sidebarprofile = ({isOpen, onClose}) => {
     const dispatch = useDispatch()
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
+    const uploadImageHandler = (picture) => {
+        // dispatch(updateDisplayPicture(picture))
+    }
     return (
         <Drawer
             isOpen={isOpen}
@@ -28,14 +31,14 @@ const Sidebarprofile = ({isOpen, onClose}) => {
                     <Flex flexDir='column' alignItems='center' justifyContent='center'>
                         <Box my={8} position='relative'>
                             <Avatar name={userInfo.name} src={userInfo.displayPicture} size='2xl'/>
-                                <label for="icon-button-file" className='icon-button-file-label'>
-                                    <Input id="icon-button-file" type="file" accept='image/*'/>
-                                    <IconButton aria-label="upload picture" isRound variant='ghost' width='8rem' height='8rem'>
-                                        <PhotoCamera />
-                                    </IconButton>
-                                </label>
+                            <label for="icon-button-file" className='icon-button-file-label'>
+                                <input id="icon-button-file" type='file' accept='image/*' onChange={(e) => uploadImageHandler(e.target.files[0]) } />
+                                <Box>
+                                    <PhotoCamera />
+                                </Box>
+                            </label>
                         </Box>
-                        <Text>{userInfo.name}</Text>
+                        <Box>{userInfo.name}</Box>
                     </Flex>
                 </DrawerBody>
                 <DrawerFooter>
