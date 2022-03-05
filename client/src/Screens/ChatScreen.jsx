@@ -24,7 +24,7 @@ const Chatscreen = ({ history }) => {
     return (
     <>
         {userInfo && (
-            <Flex height='100vh'>
+            <Flex height='100vh' overflowY='hidden'>
                 <Box1
                     isOpen={isOpen} 
                     onOpen={onOpen} 
