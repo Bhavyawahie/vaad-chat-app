@@ -9,6 +9,7 @@ import { CHAT_CURRENT_RESET, CHAT_CURRENT_SET } from '../../constants/chatConsta
 import { fetchAllChats } from '../../actions/chatActions'
 import { logout } from '../../actions/userActions'
 import { getReciever } from '../../utils/chatLogics'
+import { MESSAGE_ALL_LIST_RESET } from '../../constants/messageConstants'
 
 const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCloseCreateChat, isOpenCreateGroupChat, onOpenCreateGroupChat, onCloseCreateGroupChat}) => {
     const avatarIconURL = "https://www.clevelanddentalhc.com/wp-content/uploads/2018/03/sample-avatar.jpg"
@@ -37,6 +38,7 @@ const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCl
         localSearchInput.current.focus()
     }
     const chatOpener = (userId) => {
+        dispatch({type: MESSAGE_ALL_LIST_RESET})
         dispatch({type: CHAT_CURRENT_RESET})
         dispatch({type: CHAT_CURRENT_SET, payload: chats.find(chat => chat._id === userId)})
     }
@@ -82,6 +84,7 @@ const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCl
                                         lastMessage={chat.lastMessage ? chat.isGroupChat ? `${chat.lastMessage.sender.name}: ${chat.lastMessage.content}`: chat.lastMessage.content : null}
                                         timeStamp={chat.lastMessage ? chat.lastMessage.createdAt : ""}
                                         initiateChat={chatOpener}
+                                        openContext={() => alert(`clicked (right)`)}
                                     />
                                 ))
                             )}
