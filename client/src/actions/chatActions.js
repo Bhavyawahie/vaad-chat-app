@@ -1,5 +1,6 @@
 import axios from "axios"
 import { CHAT_ALL_LIST_FAIL, CHAT_ALL_LIST_REQUEST, CHAT_ALL_LIST_SUCCESS, CHAT_CURRENT_SET,  CHAT_ONETOONE_CREATE_FAIL, CHAT_ONETOONE_CREATE_REQUEST, CHAT_ONETOONE_CREATE_SUCCESS, CHAT_ONETOONE_LIST_FAIL, CHAT_ONETOONE_LIST_REQUEST, CHAT_ONETOONE_LIST_SUCCESS } from "../constants/chatConstants"
+import { getReciever } from "../utils/chatLogics"
 
 export const listOneToOneChat = (userId) => async (dispatch, getState) => {
     try {   
@@ -70,7 +71,7 @@ export const fetchAllChats = (search) => async (dispatch, getState) => {
         const chats = res.data
         const filteredChats = chats.filter(chat => {
             if(search !== ""){
-                return chat.chatName.toLowerCase().includes(search.toLowerCase())
+                return chat.isGroupChat ? chat.chatName.toLowerCase().includes(search.trim().toLowerCase()) : getReciever(userInfo, chat.users).name.toLowerCase().includes(search.trim().toLowerCase())
             }
         })
         if(search === ""){
