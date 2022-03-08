@@ -39,6 +39,8 @@ const fetchMessages = asyncHandler(async (req, res) => {
     if(messages.length > 0) {
         res.status(200)
         res.json(messages)
+    } else {
+        res.json([])
     }
 })
 
