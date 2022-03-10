@@ -10,8 +10,10 @@ import { fetchAllChats } from '../../actions/chatActions'
 import { logout } from '../../actions/userActions'
 import { getReciever } from '../../utils/chatLogics'
 import { MESSAGE_ALL_LIST_RESET } from '../../constants/messageConstants'
+import { Link } from 'react-router-dom'
 
 const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCloseCreateChat, isOpenCreateGroupChat, onOpenCreateGroupChat, onCloseCreateGroupChat}) => {
+    const githubLink = 'https://www.github.com/bhavyawahie'
     const avatarIconURL = "https://www.clevelanddentalhc.com/wp-content/uploads/2018/03/sample-avatar.jpg"
     const [localSearch, setLocalSearch] = useState("")
     const localSearchInput = useRef(null)
@@ -37,10 +39,12 @@ const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCl
     const searchButtonClickHandler = () => {
         localSearchInput.current.focus()
     }
-    const chatOpener = (userId) => {
-        dispatch({type: MESSAGE_ALL_LIST_RESET})
+    const chatOpener = (chatId) => {
+        if(currentChat && chatId !== currentChat._id){
+            dispatch({type: MESSAGE_ALL_LIST_RESET})
+        }
         dispatch({type: CHAT_CURRENT_RESET})
-        dispatch({type: CHAT_CURRENT_SET, payload: chats.find(chat => chat._id === userId)})
+        dispatch({type: CHAT_CURRENT_SET, payload: chats.find(chat => chat._id === chatId)})
     }
     return (
         <Box w="25%" minWidth='25%'>
@@ -60,7 +64,9 @@ const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCl
                                         <MenuList  minWidth='170px'>
                                             <MenuItem color="blackAlpha.600" onClick={onOpenCreateGroupChat}>New Group</MenuItem>
                                             <MenuItem color="blackAlpha.600" onClick={logoutHandler}>Logout</MenuItem>
-                                            <MenuItem color="blackAlpha.600">Contact Us</MenuItem>
+                                            <Link to={{pathname: githubLink}} target='_blank'>
+                                                <MenuItem color="blackAlpha.600">Contact Us</MenuItem>
+                                            </Link>
                                         </MenuList>
                                     </Menu>
                                 </Flex>
@@ -73,7 +79,7 @@ const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCl
                             <Input ref={localSearchInput} placeholder="Search" borderRadius="25px" onChange={(e) => setLocalSearch(e.target.value)}/>
                         </InputGroup>
                     </Container>
-                    <VStack spacing={2} mt={2} overflowY='auto' height='2xl'>
+                    <VStack spacing={0} mt={2} px={2} overflowY='scroll' height='2xl'>
                             {loading ? <Userloading/> : (
                                 chats.map(chat => (
                                     <ChatListItem
@@ -85,6 +91,8 @@ const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCl
                                         timeStamp={chat.lastMessage ? chat.lastMessage.createdAt : ""}
                                         initiateChat={chatOpener}
                                         openContext={() => alert(`clicked (right)`)}
+                                        bg={currentChat === chat ? '#cee5f2' : '#FFF'}
+                                        hover={currentChat === chat ? "" : "#EDF2F7"}
                                     />
                                 ))
                             )}
