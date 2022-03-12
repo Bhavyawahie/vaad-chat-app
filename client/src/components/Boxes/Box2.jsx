@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon'
-import { Avatar, Box, Button, Flex, Icon, Input, Text } from '@chakra-ui/react'
+import { Avatar, Box, Button, Flex, Icon, Input, Spinner, Text } from '@chakra-ui/react'
 import { fetchAllMessages, sendMessage } from '../../actions/messageActions'
 import MessageScrollList from '../MessageScrollList'
 import { getReciever } from '../../utils/chatLogics'
+import MessageLoader from '../MessageLoader'
 
 const Box2 = ({setSideBox}) => {
     const groupChatImgURL = `https://nirc.icai.org/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/public/partials/images/default-group.png`
@@ -41,14 +42,14 @@ const Box2 = ({setSideBox}) => {
                     </Flex>
                     <Flex height='83.4%' w='100%'>
                         <Flex w="100%" h="100%" flexDirection='column' overflowY="hidden">
-                            {loadingMessage ? <span>loading</span> : <MessageScrollList/>}
+                            {loadingMessage ? <MessageLoader/> : <MessageScrollList/>}
                         </Flex>
                     </Flex>
                     <Flex flexDirection='column' justifyContent='flex-end' mb={3}>
                         <Flex px={2}>
                             <Button variant='flushed' _hover={{backgroundColor: "rgba(229,229,229)"}}><Icon as={InsertEmoticonIcon}/></Button>
                             <Input placeholder="Type a Message" borderRadius='25px' w='90%' value={messageField} onChange={(e) => setMessageField(e.target.value)} onKeyPress={(e) => (messageField.trim() !== ""  && e.key === 'Enter') && sendMessageHandler()}/>
-                            <Button onClick={sendMessageHandler} disabled={messageField === "" && true} >Send</Button>
+                            <Button onClick={sendMessageHandler} disabled={(messageField === "" || messageField) && true} >Send</Button>
                         </Flex>
                     </Flex>
                 </Flex>)
