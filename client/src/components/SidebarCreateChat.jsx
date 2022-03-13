@@ -17,8 +17,8 @@ const SidebarCreateChat = ({isOpenCreateChat, onCloseCreateChat}) => {
     const inputHandler = (e) => {
         setSearch(e.target.value)
     }
-    const chatOpener = (userId) => {
-        dispatch(createOneToOneChat(userId))
+    const chatOpener = (user) => {
+        dispatch(createOneToOneChat(user._id))
         onCloseCreateChat()
         dispatch({type: USER_SEARCH_RESET})
     }
@@ -55,10 +55,7 @@ const SidebarCreateChat = ({isOpenCreateChat, onCloseCreateChat}) => {
                                 users.map(user => (
                                     <UserListItem
                                         key={user._id}
-                                        id={user._id}
-                                        name={user.name}
-                                        email={user.email}
-                                        displayPicture={user.displayPicture}
+                                        user={user}
                                         initiateChat={chatOpener}
                                     />
                                 ))
