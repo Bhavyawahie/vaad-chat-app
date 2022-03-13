@@ -6,6 +6,7 @@ import { fetchAllMessages, sendMessage } from '../../actions/messageActions'
 import MessageScrollList from '../MessageScrollList'
 import { getReciever } from '../../utils/chatLogics'
 import MessageLoader from '../MessageLoader'
+import groupIcon from '../../img/groupIcon.png'
 
 const Box2 = ({setSideBox}) => {
     const groupChatImgURL = `https://nirc.icai.org/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/public/partials/images/default-group.png`
@@ -35,7 +36,7 @@ const Box2 = ({setSideBox}) => {
                     <Flex flexDirection="row" justifyContent="flex-start" borderBottom='1px solid rgb(229,229,229)' py={3}>
                             <Flex w='80%' ml={4} onClick={() => setSideBox(true) }>
                                 <Box>
-                                    <Avatar src={currentChat.isGroupChat ? groupChatImgURL : getReciever(userInfo, currentChat.users).displayPicture} boxSize="2.5rem" borderRadius="50%"></Avatar>
+                                    <Avatar src={currentChat.isGroupChat ? groupIcon : getReciever(userInfo, currentChat.users).displayPicture} boxSize="2.5rem" borderRadius="50%"></Avatar>
                                 </Box>
                                 <Text fontSize='lg' ml={3}>{  currentChat.isGroupChat ? currentChat.chatName : getReciever(userInfo, currentChat.users).name}</Text>
                             </Flex>

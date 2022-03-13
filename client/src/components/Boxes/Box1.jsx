@@ -11,6 +11,7 @@ import { logout } from '../../actions/userActions'
 import { getReciever } from '../../utils/chatLogics'
 import { MESSAGE_ALL_LIST_RESET } from '../../constants/messageConstants'
 import { Link } from 'react-router-dom'
+import groupIcon from '../../img/groupIcon.png'
 
 const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCloseCreateChat, isOpenCreateGroupChat, onOpenCreateGroupChat, onCloseCreateGroupChat}) => {
     const githubLink = 'https://www.github.com/bhavyawahie'
@@ -86,7 +87,7 @@ const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCl
                                         key={chat._id}
                                         id={chat._id}
                                         name={chat.isGroupChat ? chat.chatName : getReciever(userInfo, chat.users).name}
-                                        displayPicture={chat.isGroupChat? `https://nirc.icai.org/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/public/partials/images/default-group.png` : getReciever(userInfo, chat.users).displayPicture}
+                                        displayPicture={chat.isGroupChat? groupIcon : getReciever(userInfo, chat.users).displayPicture}
                                         lastMessage={chat.lastMessage ? chat.isGroupChat ? `${chat.lastMessage.sender.name}: ${chat.lastMessage.content}`: chat.lastMessage.content : null}
                                         timeStamp={chat.lastMessage ? chat.lastMessage.createdAt : ""}
                                         initiateChat={chatOpener}
