@@ -22,3 +22,5 @@ const messageSchema = new mongoose.Schema({
 
 const messageModel = mongoose.model('Message', messageSchema)
 module.exports = messageModel
+// messageModel.watch().
+//     on('change', data => console.log(new Date(), data));
