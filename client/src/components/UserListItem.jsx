@@ -1,10 +1,10 @@
 import React from 'react'
 import { Avatar, Box, Flex, Text } from '@chakra-ui/react'
 
-const UserListItem = ({id, name, email, displayPicture, initiateChat}) => {
-    console.log()
+const UserListItem = ({initiateChat, user}) => {
+    const {_id, name, email, displayPicture} = user
     return (
-            <Flex w='100%' px={3} py={.5} flexDirection='row' borderRadius='10px' _hover={{backgroundColor: "#EDF2F7"}} onClick={() => initiateChat(id)}>
+            <Flex w='100%' px={3} py={.5} flexDirection='row' borderRadius='10px' _hover={{backgroundColor: "#EDF2F7"}} onClick={() => initiateChat(user)}>
                 <Box py={1} mr={4}>
                     <Avatar name={name} src={displayPicture}/>
                 </Box>
