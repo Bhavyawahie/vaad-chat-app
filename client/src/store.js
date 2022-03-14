@@ -1,7 +1,7 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import { chatAllListReducer, chatCurrentSetReducer, chatOneToOneCreateReducer, chatOneToOneListReducer } from './reducers/chatReducers'
+import { chatAllListReducer, chatCurrentSetReducer, chatGroupCreateReducer, chatOneToOneCreateReducer, chatOneToOneListReducer } from './reducers/chatReducers'
 import { messageListAllReducer, messageSendReducer } from './reducers/messageReducers'
 import { userLoginReducer, userRegisterReducer, userSearchReducer } from './reducers/userReducer'
 
@@ -13,6 +13,7 @@ const reducers = combineReducers({
     chatAllList: chatAllListReducer,
     chatOneToOneCreate: chatOneToOneCreateReducer,
     chatOneToOneList: chatOneToOneListReducer,
+    chatGroupCreate: chatGroupCreateReducer,
     messageListAll: messageListAllReducer,
     messageSend: messageSendReducer
 })
