@@ -4,6 +4,7 @@ import { Box, Button, Container, Flex, Heading, Image, Input, Spacer, Stack, use
 import image from '../image.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../actions/userActions'
+import { USER_LOGIN_RESET } from '../constants/userConstants'
 
 
 const HomeScreen = ({history, location}) => {
@@ -28,6 +29,7 @@ const HomeScreen = ({history, location}) => {
         e.preventDefault()
         dispatch(login(input))
     }
+
     useEffect(() => {
         if(userInfo){
             history.push('/chats')
@@ -36,7 +38,12 @@ const HomeScreen = ({history, location}) => {
     return (
         <>
             <Header location={location}/>
-            {error && toast({position: "top-right", title: `${error}`, status: "error", isClosable: true, duration: "4000"})}
+            {error && (() => {
+                toast({position: "top-right", title: `${error}`, status: "error", isClosable: true, duration: "4000"}) 
+                dispatch({type: USER_LOGIN_RESET})
+                })()
+            }
+
             <Flex>
                 <Container maxW="container.xl" mt={4}>
                     <Flex>
