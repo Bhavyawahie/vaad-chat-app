@@ -57,7 +57,6 @@ export const chatAllListReducer = ( state = { chats: []}, action) => {
     
 }
 
-
 export const chatGroupCreateReducer = (state = {}, action) => {
     switch(action.type){
         case CHAT_GROUP_CREATE_REQUEST:
