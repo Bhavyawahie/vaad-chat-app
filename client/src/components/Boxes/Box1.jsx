@@ -13,7 +13,7 @@ import { MESSAGE_ALL_LIST_RESET } from '../../constants/messageConstants'
 import { Link } from 'react-router-dom'
 import groupIcon from '../../img/groupIcon.png'
 
-const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCloseCreateChat, isOpenCreateGroupChat, onOpenCreateGroupChat, onCloseCreateGroupChat}) => {
+const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCloseCreateChat, isOpenCreateGroupChat, onOpenCreateGroupChat, onCloseCreateGroupChat}) => {
     const githubLink = 'https://www.github.com/bhavyawahie'
     const avatarIconURL = "https://www.clevelanddentalhc.com/wp-content/uploads/2018/03/sample-avatar.jpg"
     const [localSearch, setLocalSearch] = useState("")
@@ -41,6 +41,7 @@ const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCl
         localSearchInput.current.focus()
     }
     const chatOpener = (chatId) => {
+        setSideBox(false)
         if(currentChat && chatId !== currentChat._id){
             dispatch({type: MESSAGE_ALL_LIST_RESET})
         }
@@ -52,14 +53,14 @@ const Box1 = ({isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCl
                 <Flex flexDirection="column" mt={2}>
                     <Container py={2}>
                         <Flex flexDirection="row">
-                            <Box py={1} pr={2}>
-                                    <Avatar as='button' name="sample user" src={userInfo.displayPicture} boxSize="40px" borderRadius="50%" onClick={onOpen} _focus={{outline: 'none'}}/>            
-                            </Box>
+                            <Flex alignItems='center'>
+                                <Avatar as='button' name={userInfo.name} src={userInfo.displayPicture} boxSize='2.5rem' mr={2} onClick={onOpen} _focus={{outline: 'none'}}/>            
+                            </Flex>
                             <Heading d={{base: "none", lg: "flex"}} size="lg" py={1}>Chats</Heading>
                             <Spacer/>
                             <Button onClick={onOpenCreateChat} variant='flush' w='1' borderRadius="full" bgColor="#EDF2F7"><EditIcon/></Button>
                             <Box>
-                                <Flex p={2}>
+                                <Flex py={2} ml={2}>
                                     <Menu borderRadius="50%" placement="left-end" offset={[14,-5]}>
                                         <MenuButton><Icon as={MoreVertIcon}/></MenuButton>
                                         <MenuList  minWidth='170px'>

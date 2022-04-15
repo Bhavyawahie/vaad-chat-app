@@ -26,6 +26,7 @@ const Chatscreen = ({ history }) => {
         {userInfo && (
             <Flex height='100vh' overflowY='hidden'>
                 <Box1
+                    setSideBox={setSideBox}
                     isOpen={isOpen} 
                     onOpen={onOpen} 
                     onClose={onClose}
@@ -40,7 +41,7 @@ const Chatscreen = ({ history }) => {
                 <SidebarCreateChat isOpenCreateChat={isOpenCreateChat} onCloseCreateChat={onCloseCreateChat}/>
                 <SidebarCreateGroupChat isOpenCreateGroupChat={isOpenCreateGroupChat} onCloseCreateGroupChat={onCloseCreateGroupChat}/>
                 <Box2 setSideBox={setSideBox}/>
-                {sidebox && <Box3/>}
+                {sidebox && <Box3 setSideBox={setSideBox} />}
             </Flex>
         )} 
     </>
