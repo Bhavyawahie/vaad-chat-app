@@ -1,11 +1,16 @@
-// const server = http.createServer(app)
-// const io = require('socket.io')(server, {})
 const express = require('express');
 const app = express()
 const http = require('http')
 const path = require('path')
 const dotenv = require('dotenv');
 const morgan = require('morgan')
+const server = http.createServer(app)
+const io = require('socket.io')(server, {
+    pingTimeout: 60000,
+    cors: {
+        origin: "http://localhost:3000"
+    }
+})
 require('colors');
 
 const connectDB = require('./config/db')
@@ -35,6 +40,41 @@ app.use(errorHandler)
 
 const PORT = process.env.PORT || 4000
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server started running at http://localhost:${PORT}`.yellow.inverse);
+})
+
+io.on('connection', (socket) => {
+    console.log("connected to the socket")
+
+
+    socket.on('message', (message) => {
+        console.log(message)
+    })
+
+    socket.on('setup', (userData) => {
+        socket.join(userData.id)
+        socket.emit('connected')
+    })
+
+    socket.on('joinChat', (room) => {
+        socket.join(room)
+        console.log(`Current User Joined Room: ${room}`)
+    })
+
+    socket.on('newMessage', (message) => {
+        let chat = message.chat
+        if(!chat.users){
+            return console.log('chat users not defined')
+        }
+
+        chat.users.forEach(user => {
+            if(user._id === message.sender._id){
+                return
+            }
+            socket.in(user._id).emit('messageRecieved', message)
+        })
+
+    })
+
 })
