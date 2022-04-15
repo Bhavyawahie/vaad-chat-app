@@ -2,15 +2,19 @@ import React, {useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon'
 import { Avatar, Box, Button, Flex, Icon, Input, Spinner, Text } from '@chakra-ui/react'
+import {MESSAGE_ALL_LIST_SUCCESS} from '../../constants/messageConstants'
 import { fetchAllMessages, sendMessage } from '../../actions/messageActions'
 import MessageScrollList from '../MessageScrollList'
 import { getReciever } from '../../utils/chatLogics'
 import MessageLoader from '../MessageLoader'
 import groupIcon from '../../img/groupIcon.png'
+import io from 'socket.io-client'
 
+let socket, selectedChatCompare
 const Box2 = ({setSideBox}) => {
     const groupChatImgURL = `https://nirc.icai.org/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/public/partials/images/default-group.png`
     const [messageField, setMessageField] = useState("")
+    const [chatConnected, setchatConnected] = useState(false)
     const dispatch = useDispatch()
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
@@ -25,10 +29,34 @@ const Box2 = ({setSideBox}) => {
         setMessageField("")
     }
     useEffect(() => {
+        socket = io()
+        socket.emit('setup', {id: userInfo.id, name: userInfo.name, email: userInfo.email})
+        socket.on('connection', () => setchatConnected(true))
+    }, [])
+
+    useEffect(() => {
         if(currentChat){
             dispatch(fetchAllMessages(currentChat._id))
+            selectedChatCompare = currentChat
         }
     }, [currentChat])
+
+
+    useEffect( () => {
+        socket.on('messageRecieved', (newRecievedMessage) => {
+            if(!selectedChatCompare || selectedChatCompare._id !== newRecievedMessage.chat._id){
+                // NOTIFY THE USER BY UPDATING THE UNREAD CHAT (Add it to the chat model)
+            } 
+            else {
+                console.log(newRecievedMessage)
+                dispatch({
+                    type: MESSAGE_ALL_LIST_SUCCESS,
+                    payload: newRecievedMessage
+                })
+            }
+        })
+    }, [])
+    
     return (
         <Box bg="white" w="75%" minWidth="50%" borderLeft="1px solid rgb(229,229,229)">
                 { currentChat ? (
@@ -59,4 +87,5 @@ const Box2 = ({setSideBox}) => {
     )
 }
 
+export {socket}
 export default Box2
