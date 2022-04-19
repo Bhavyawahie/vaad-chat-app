@@ -1,11 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { EditIcon, SearchIcon } from '@chakra-ui/icons'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
-import { Avatar, Box, Button, Container, Flex, Heading, Icon, Input, InputGroup, InputLeftElement, Menu, MenuButton, MenuItem, MenuList, Spacer, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Button, Container, Flex, Heading, Icon, IconButton, Input, InputGroup, InputLeftElement, Menu, MenuButton, MenuItem, MenuList, Spacer, VStack, useToast } from '@chakra-ui/react'
 import ChatListItem from '../ChatListItem'
 import Userloading from '../UserLoading'
 import { useDispatch, useSelector } from 'react-redux'
-import { CHAT_CURRENT_RESET, CHAT_CURRENT_SET } from '../../constants/chatConstants'
+import { CHAT_CURRENT_RESET, CHAT_CURRENT_SET, CHAT_ONETOONE_CREATE_RESET } from '../../constants/chatConstants'
 import { fetchAllChats } from '../../actions/chatActions'
 import { logout } from '../../actions/userActions'
 import { getReciever } from '../../utils/chatLogics'
@@ -16,6 +16,7 @@ import groupIcon from '../../img/groupIcon.png'
 const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCloseCreateChat, isOpenCreateGroupChat, onOpenCreateGroupChat, onCloseCreateGroupChat}) => {
     const githubLink = 'https://www.github.com/bhavyawahie'
     const avatarIconURL = "https://www.clevelanddentalhc.com/wp-content/uploads/2018/03/sample-avatar.jpg"
+    const toast = useToast()
     const [localSearch, setLocalSearch] = useState("")
     const localSearchInput = useRef(null)
     const dispatch = useDispatch()
@@ -50,6 +51,11 @@ const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCrea
     }
     return (
         <Box w="25%" minWidth='25%'>
+                {createChatError && (() => {
+                    toast({position: "top-right", title: `${createChatError}`, status: "warning", isClosable: true, duration: "3000"}) 
+                    dispatch({type: CHAT_ONETOONE_CREATE_RESET})
+                    })()
+                }
                 <Flex flexDirection="column" mt={2}>
                     <Container py={2}>
                         <Flex flexDirection="row">
@@ -58,7 +64,7 @@ const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCrea
                             </Flex>
                             <Heading d={{base: "none", lg: "flex"}} size="lg" py={1}>Chats</Heading>
                             <Spacer/>
-                            <Button onClick={onOpenCreateChat} variant='flush' w='1' borderRadius="full" bgColor="#EDF2F7"><EditIcon/></Button>
+                            <IconButton onClick={onOpenCreateChat} variant='ghost' w='1' borderRadius="full" bgColor="#EDF2F7" icon={<EditIcon/>}/>
                             <Box>
                                 <Flex py={2} ml={2}>
                                     <Menu borderRadius="50%" placement="left-end" offset={[14,-5]}>

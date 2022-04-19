@@ -12,7 +12,7 @@ const MessageScrollList = () => {
     return (
         <ScrollableFeed className='messageScrollList'>
             {messages && messages.map((message, index) => (
-                <Flex width='max-content' key={message._id} backgroundColor={`#EDF2F7`} py={2} px={4} my={4} borderRadius='20px' marginLeft={isSameSenderMargin(messages, message, index, userInfo.id)}>
+                <Flex width='max-content' key={message._id} backgroundColor={`#EDF2F7`} py={2} px={4} my={5} borderRadius='20px' marginLeft={isSameSenderMargin(messages, message, index, userInfo.id)}>
                     <Box>
                         {message.content}
                     </Box>
