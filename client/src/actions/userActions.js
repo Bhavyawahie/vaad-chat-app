@@ -2,6 +2,9 @@ import axios from 'axios'
 import { CHAT_CURRENT_RESET } from '../constants/chatConstants'
 import { MESSAGE_ALL_LIST_RESET } from '../constants/messageConstants'
 import {
+    USER_DISPLAYPICTURE_UPDATE_REQUEST,
+    USER_DISPLAYPICTURE_UPDATE_SUCCESS,
+    USER_DISPLAYPICTURE_UPDATE_FAIL,
     USER_LOGIN_FAIL,
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
@@ -86,6 +89,40 @@ export const searchUser = (searchQuery) => async (dispatch, getState) => {
         dispatch({
             type: USER_SEARCH_FAIL,
             payload: error.message && error.response.data.message ? error.response.data.message : error.message
+        })
+    }
+}
+
+export const updateDisplayPicture = (picture) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: USER_DISPLAYPICTURE_UPDATE_REQUEST
+        })
+        const {userLogin: {userInfo}} = getState()
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${userInfo.token}`,
+                'Content-Type': 'application/json'
+            }
+        }
+        const reader = new FileReader()
+        reader.readAsDataURL(picture)
+        reader.onloadend = async () => {
+            const res = await axios.patch(`/api/users/${userInfo.id}`, JSON.stringify({displayPicture: reader.result}), config)
+            dispatch({
+                type: USER_DISPLAYPICTURE_UPDATE_SUCCESS,
+                payload: res.data
+            }) 
+            dispatch({
+                type: USER_LOGIN_SUCCESS,
+                payload: res.data
+            })
+            localStorage.setItem('userInfo', JSON.stringify(res.data))
+        }
+    } catch (error) {
+        dispatch({
+            type: USER_DISPLAYPICTURE_UPDATE_FAIL,
+            payload: error.message && error.response.data.message ? error.response.data.message : error.message 
         })
     }
 }

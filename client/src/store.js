@@ -3,12 +3,13 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { chatAllListReducer, chatCurrentSetReducer, chatGroupCreateReducer, chatOneToOneCreateReducer, chatOneToOneListReducer } from './reducers/chatReducers'
 import { messageListAllReducer, messageSendReducer } from './reducers/messageReducers'
-import { userLoginReducer, userRegisterReducer, userSearchReducer } from './reducers/userReducer'
+import { userDisplayPictureUpdateReducer, userLoginReducer, userRegisterReducer, userSearchReducer } from './reducers/userReducer'
 
 const reducers = combineReducers({
     userRegister: userRegisterReducer,
     userLogin: userLoginReducer,
     userSearch: userSearchReducer,
+    userDisplayPictureUpdate: userDisplayPictureUpdateReducer,
     chatCurrentSet: chatCurrentSetReducer,
     chatAllList: chatAllListReducer,
     chatOneToOneCreate: chatOneToOneCreateReducer,

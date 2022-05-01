@@ -1,4 +1,4 @@
-import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_RESET, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_RESET, USER_REGISTER_SUCCESS, USER_SEARCH_FAIL, USER_SEARCH_REQUEST, USER_SEARCH_RESET, USER_SEARCH_SUCCESS } from "../constants/userConstants";
+import { USER_DISPLAYPICTURE_UPDATE_FAIL, USER_DISPLAYPICTURE_UPDATE_REQUEST, USER_DISPLAYPICTURE_UPDATE_RESET, USER_DISPLAYPICTURE_UPDATE_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_RESET, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_RESET, USER_REGISTER_SUCCESS, USER_SEARCH_FAIL, USER_SEARCH_REQUEST, USER_SEARCH_RESET, USER_SEARCH_SUCCESS } from "../constants/userConstants";
 
 export const userLoginReducer = (state = {}, action) => {
     switch(action.type) {
@@ -45,4 +45,19 @@ export const userSearchReducer = (state = {users: []}, action) => {
         default: 
             return state    
     }   
+}
+
+export const userDisplayPictureUpdateReducer = (state = {}, action) =>{
+    switch (action.type) {
+        case USER_DISPLAYPICTURE_UPDATE_REQUEST:
+            return  { loading: true }
+        case USER_DISPLAYPICTURE_UPDATE_SUCCESS:
+            return { loading: false, success: true, userInfo: action.payload}
+        case USER_DISPLAYPICTURE_UPDATE_FAIL:
+            return {loading: false, error: action.payload}
+        case USER_DISPLAYPICTURE_UPDATE_RESET:
+            return {}
+        default: 
+            return state 
+    }
 }
