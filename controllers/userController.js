@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
 const generateToken = require('../utils/generateToken')
+const {cloudinary} = require('../utils/cloudinarySetup')
 
 // @desc:   Register a new user
 // @route:  POST /api/users/
@@ -91,12 +92,43 @@ const allUsers = asyncHandler(async (req, res) => {
         res.status(404)
         throw new Error('User not found')
     }
+})
 
+// @desc:   Update the display picture of the currently loggedin user
+// @route:  PATCH /api/users/:userId
+// @access: Protected
+
+const changeDisplayPicture = asyncHandler(async (req, res) => {
+    const userId = req.params.userId
+    const displayPicture = req.body.displayPicture
+    if(displayPicture){
+        const uploadResponse = await cloudinary.uploader.upload(displayPicture, {
+            upload_preset: 'chat-app',
+        })
+        if(uploadResponse){
+            const user = await User.findById(userId)
+            user.displayPicture = uploadResponse.url
+            const updatedUser = await user.save()
+            res.status(200).json({
+                id: updatedUser._id,
+                name: updatedUser.name,
+                email: updatedUser.email,
+                isAppAdmin: updatedUser.isAppAdmin,
+                displayPicture: updatedUser.displayPicture,
+                token: generateToken(updatedUser._id)
+            })
+        } 
+        else{
+            res.status(400)
+            throw new Error('Upload a correct Image file')
+        }
+    }
 
 })
 
 module.exports = {
     register,
     authUser,
-    allUsers
+    allUsers,
+    changeDisplayPicture
 }
