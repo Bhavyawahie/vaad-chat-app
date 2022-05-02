@@ -67,6 +67,9 @@ const fetchChats = asyncHandler(async (req, res) => {
         })
         res.status(200)
         res.json(chats)
+    } else if(chats.length == 0) {
+        res.status(200)
+        res.json([])
     }
     else {
         res.status(404)
