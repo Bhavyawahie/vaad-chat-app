@@ -35,7 +35,7 @@ const Sidebarprofile = ({isOpen, onClose}) => {
                         <Box my={8} position='relative'>
                             {loading ? <Flex w='8rem' h='8rem' justifyContent='center' alignItems='center'><Spinner thickness='4px'speed='0.65s' emptyColor='gray.200' color='blue.500' size='xl'/></Flex> :(
                                 <>
-                                    <Avatar name={userInfo.name} src={userInfo.displayPicture} size='2xl'/>
+                                    <Avatar name={userInfo.name} src={userInfo.displayPicture} size='2xl' />
                                     <label for="icon-button-file" className='icon-button-file-label'>
                                     <input id="icon-button-file" type='file' accept='image/*' onChange={(e) => uploadImageHandler(e.target.files[0]) } />
                                     <Box>
