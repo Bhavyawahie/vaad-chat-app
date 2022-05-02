@@ -1,16 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ArrowBackIcon, ArrowForwardIcon, CheckIcon } from '@chakra-ui/icons';
-import { Avatar, Box, Button, Container, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, Flex, IconButton, Input, Skeleton, StackDivider, Text, Tooltip, VStack } from '@chakra-ui/react';
+import { Avatar, Box, Button, Container, Drawer, DrawerBody, DrawerContent, DrawerHeader, Flex, IconButton, Input, Skeleton, StackDivider, Text, Tooltip, useToast, VStack } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchUser } from '../actions/userActions';
 import Userloading from './UserLoading';
 import UserListItem from './UserListItem';
 import { USER_SEARCH_RESET } from '../constants/userConstants';
-import { createGroupChat, createOneToOneChat } from '../actions/chatActions';
+import { createGroupChat } from '../actions/chatActions';
 import UserBadgeItem from './UserBadgeItem';
 import groupIcon from '../img/groupIcon.png'
 
 const SidebarCreateGroupChat = ({isOpenCreateGroupChat, onCloseCreateGroupChat}) => {
+    const toast =  useToast()
     const btnRef = useRef()
     const [search, setSearch] = useState("")
     const [notSubmitted, setNotSubmitted] = useState(true)
@@ -23,13 +24,17 @@ const SidebarCreateGroupChat = ({isOpenCreateGroupChat, onCloseCreateGroupChat})
         setSearch(e.target.value)
     }
     const chatParticipantsHandler = (userId) => {
+        const isDuplicate = (data, obj) => data.some((el) => Object.entries(obj).every(([key, value]) => value === el[key]))
         setGroupParticipants(prevVal => {
-            return [...prevVal, userId]
+            if(!isDuplicate(prevVal, userId)){
+                return [...prevVal, userId]
+            } else {
+                toast({position: "top-right", title: `User Already Added`, status: "warning", duration: "3000"}) 
+                return [...prevVal]
+            }
         })
         setSearch("")
         dispatch({type: USER_SEARCH_RESET})
-        // dispatch(createOneToOneChat(userId))
-        // onCloseCreateChat()
     }
     const chatParticipantsCheckOffHandler = (userId) => {
         setGroupParticipants(prevVal => prevVal.filter(user => user._id !== userId))
@@ -120,8 +125,8 @@ const SidebarCreateGroupChat = ({isOpenCreateGroupChat, onCloseCreateGroupChat})
                                 <Container>
                                     <Input variant='flushed' placeholder='Group Subject' value={groupName} onChange={(e) => setGroupName(e.target.value)} />
                                 </Container>
-                                {groupName.length >= 1 && <Flex justify='center' alignItems='center'>
-                                    <IconButton bg='#cee5f2' onClick={groupChatHandler}>
+                                {groupName.length >= 1 && <Flex justify='center' alignItems='center' mt={10}>
+                                    <IconButton bg='#cee5f2' onClick={groupChatHandler} py={5}>
                                         <CheckIcon/>
                                     </IconButton>
                                 </Flex>}
