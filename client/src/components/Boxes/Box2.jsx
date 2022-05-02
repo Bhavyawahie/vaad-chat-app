@@ -29,7 +29,7 @@ const Box2 = ({setSideBox}) => {
         setMessageField("")
     }
     useEffect(() => {
-        socket = io()
+        socket = io('http://localhost:4000')
         socket.emit('setup', {id: userInfo.id, name: userInfo.name, email: userInfo.email})
         socket.on('connection', () => setchatConnected(true))
     }, [])
@@ -77,8 +77,8 @@ const Box2 = ({setSideBox}) => {
                     <Flex flexDirection='column' justifyContent='flex-end' mb={3}>
                         <Flex px={2}>
                             <Button variant='flushed' _hover={{backgroundColor: "rgba(229,229,229)"}}><Icon as={InsertEmoticonIcon}/></Button>
-                            <Input placeholder="Type a Message" borderRadius='25px' w='90%' value={messageField} onChange={(e) => setMessageField(e.target.value)} onKeyPress={(e) => (messageField.trim() !== ""  && e.key === 'Enter') && sendMessageHandler()}/>
-                            <Button onClick={sendMessageHandler} disabled={(messageField === "" || messageField) && true} >Send</Button>
+                            <Input autoFocus={true} placeholder="Type a Message" borderRadius='25px' w='90%' value={messageField} onChange={(e) => setMessageField(e.target.value)} onKeyPress={(e) => (messageField.trim() !== ""  && e.key === 'Enter') && sendMessageHandler()}/>
+                            <Button ml={1} onClick={sendMessageHandler} disabled={(messageField === "" || messageField.trim() == "")} >Send</Button>
                         </Flex>
                     </Flex>
                 </Flex>)
