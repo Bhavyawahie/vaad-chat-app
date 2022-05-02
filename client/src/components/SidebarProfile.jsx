@@ -1,11 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { ArrowBackIcon } from '@chakra-ui/icons';
-import { Avatar, Box, Button, Drawer, DrawerBody, DrawerContent,  DrawerHeader, Flex, Spinner, Text } from '@chakra-ui/react';
+import { Avatar, Box, Button, Drawer, DrawerBody, DrawerContent,  DrawerHeader, Flex, Spinner, Text, useToast } from '@chakra-ui/react';
 import PhotoCamera from '@mui/icons-material/PhotoCamera'
 import {updateDisplayPicture} from '../actions/userActions'
+import { USER_DISPLAYPICTURE_UPDATE_RESET } from '../constants/userConstants';
 
 const Sidebarprofile = ({isOpen, onClose}) => {
+    const toast = useToast()
     const dispatch = useDispatch()
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
@@ -22,6 +24,11 @@ const Sidebarprofile = ({isOpen, onClose}) => {
             size='sm'
             >
             <DrawerContent shadow="none" w='25%' maxW='25%'>
+            {error && (() => {
+                    toast({position: "top-right", title: `${error}`, status: "error", isClosable: true, duration: "3000"}) 
+                    dispatch({type: USER_DISPLAYPICTURE_UPDATE_RESET})
+                    })()
+            }
             <DrawerHeader>
                     <Flex>
                         <Button variant="flushed" onClick={onClose} _focus={{outline: "none"}}>
