@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { ArrowBackIcon } from '@chakra-ui/icons';
-import { Avatar, Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, Flex, IconButton, Input, Spinner,Text } from '@chakra-ui/react';
+import { Avatar, Box, Button, Drawer, DrawerBody, DrawerContent,  DrawerHeader, Flex, Spinner, Text } from '@chakra-ui/react';
 import PhotoCamera from '@mui/icons-material/PhotoCamera'
 import {updateDisplayPicture} from '../actions/userActions'
 
@@ -44,7 +44,8 @@ const Sidebarprofile = ({isOpen, onClose}) => {
                                     </label>
                                 </>)}
                         </Box>
-                        <Box>{userInfo.name}</Box>
+                        <Text fontSize='2xl'>{userInfo.name}</Text>
+                        <Text fontSize='lg'>{userInfo.email}</Text>
                     </Flex>
                 </DrawerBody>
             </DrawerContent>
