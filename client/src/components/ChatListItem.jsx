@@ -1,6 +1,5 @@
 import React from 'react'
 import { Avatar, Box, Flex, Spacer, Text } from '@chakra-ui/react'
-import { useSelector } from 'react-redux'
 
 const ChatListItem = ({id, name, displayPicture, lastMessage, timeStamp, initiateChat, openContext, bg, hover}) => {
     return (
