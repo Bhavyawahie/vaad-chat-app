@@ -29,25 +29,24 @@ connectDB()
 app.use(express.urlencoded({limit: '50mb', extended: true}))
 app.use(express.json({limit: '50mb'}))
 app.use(fileUpload())
-
-if(process.env.NODE_ENV === 'development') {
+if(process.env.NODE_ENV === 'production') {
     app.use(morgan('dev'))
 }
 
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join('client/build')))
+    app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')))
+} else {
+    app.get("/", (req, res) => {
+        res.send("API in work!")
+    })
+}
 app.use('/api/users', userRoutes)
 app.use('/api/chats', chatRoutes)
 app.use('/api/messages', messageRoutes)
 app.use(notFound)
 app.use(errorHandler)
 
-if(process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '/client/build')))
-    app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')))
-} else {
-    app.get("/", (req, res) => {
-        res.send("API in work!")
-    })
-}
 
 const PORT = process.env.PORT || 4000
 

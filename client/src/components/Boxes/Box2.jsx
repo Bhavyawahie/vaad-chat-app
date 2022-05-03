@@ -29,7 +29,7 @@ const Box2 = ({setSideBox}) => {
         setMessageField("")
     }
     useEffect(() => {
-        socket = io()
+        socket = io('https://vaad-chat-app.herokuapp.com/')
         socket.emit('setup', {id: userInfo.id, name: userInfo.name, email: userInfo.email})
         socket.on('connection', () => setchatConnected(true))
     }, [])
