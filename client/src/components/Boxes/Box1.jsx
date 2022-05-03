@@ -1,10 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Avatar, Box, Button, Container, Flex, Heading, Icon, IconButton, Input, InputGroup, InputLeftElement, Menu, MenuButton, MenuItem, MenuList, Spacer, VStack, useToast } from '@chakra-ui/react'
 import { EditIcon, SearchIcon } from '@chakra-ui/icons'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
-import { Avatar, Box, Button, Container, Flex, Heading, Icon, IconButton, Input, InputGroup, InputLeftElement, Menu, MenuButton, MenuItem, MenuList, Spacer, VStack, useToast } from '@chakra-ui/react'
 import ChatListItem from '../ChatListItem'
 import Userloading from '../UserLoading'
-import { useDispatch, useSelector } from 'react-redux'
 import { CHAT_CURRENT_RESET, CHAT_CURRENT_SET, CHAT_ONETOONE_CREATE_RESET } from '../../constants/chatConstants'
 import { fetchAllChats } from '../../actions/chatActions'
 import { logout } from '../../actions/userActions'
@@ -15,7 +15,6 @@ import groupIcon from '../../img/groupIcon.png'
 
 const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCloseCreateChat, isOpenCreateGroupChat, onOpenCreateGroupChat, onCloseCreateGroupChat}) => {
     const githubLink = 'https://www.github.com/bhavyawahie'
-    const avatarIconURL = "https://www.clevelanddentalhc.com/wp-content/uploads/2018/03/sample-avatar.jpg"
     const toast = useToast()
     const [localSearch, setLocalSearch] = useState("")
     const localSearchInput = useRef(null)
@@ -26,6 +25,8 @@ const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCrea
     const { loading, chats, error } = chatAllList
     const chatOneToOneCreate = useSelector(state => state.chatOneToOneCreate)
     const {loading: createChatLoading, chat: createdChat, error: createChatError} = chatOneToOneCreate
+    const chatGroupCreate = useSelector(state => state.chatGroupCreate)
+    const {loading: createGroupChatLoading, chat: createdGroupChat, error: createGroupChatError} = chatGroupCreate 
     const messageSend = useSelector(state => state.messageSend)
     const { message } = messageSend
     const chatCurrentSet = useSelector(state => state.chatCurrentSet)
@@ -34,7 +35,7 @@ const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCrea
         if(userInfo){
             dispatch(fetchAllChats(localSearch))
         }
-    }, [createdChat, localSearch, message])
+    }, [createdChat, createdGroupChat,localSearch, message, dispatch, userInfo])
     const logoutHandler = () => {
         dispatch(logout())
     }
@@ -99,7 +100,7 @@ const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCrea
                                         timeStamp={chat.lastMessage ? chat.lastMessage.createdAt : ""}
                                         initiateChat={chatOpener}
                                         openContext={() => alert(`clicked (right)`)}
-                                        bg={currentChat === chat ? '#cee5f2' : '#FFF'}
+                                        bg={currentChat ? currentChat._id === chat._id ? '#cee5f2' : "#FFF" : ""}
                                         hover={currentChat === chat ? "" : "#EDF2F7"}
                                     />
                                 ))

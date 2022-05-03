@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ArrowBackIcon, ArrowForwardIcon, CheckIcon } from '@chakra-ui/icons';
-import { Avatar, Box, Button, Container, Drawer, DrawerBody, DrawerContent, DrawerHeader, Flex, IconButton, Input, Skeleton, StackDivider, Text, Tooltip, useToast, VStack } from '@chakra-ui/react';
+import { Avatar, Box, Button, Container, Drawer, DrawerBody, DrawerContent, DrawerHeader, Flex, IconButton, Input, Text, Tooltip, useToast, VStack } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchUser } from '../actions/userActions';
 import Userloading from './UserLoading';
@@ -60,9 +60,9 @@ const SidebarCreateGroupChat = ({isOpenCreateGroupChat, onCloseCreateGroupChat})
             dispatch({type: USER_SEARCH_RESET})
         }
     }, [search])
-    useEffect(() => {
-        console.log(groupParticipants)
-    }, [groupParticipants])
+    // useEffect(() => {
+    //     console.log(groupParticipants)
+    // }, [groupParticipants])
     
     return (
         <Drawer

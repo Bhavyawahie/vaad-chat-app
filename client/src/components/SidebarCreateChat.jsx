@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ArrowBackIcon } from '@chakra-ui/icons';
-import { Button, Container, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, Flex, Input, Skeleton, StackDivider, VStack } from '@chakra-ui/react';
+import { Button, Container, Drawer, DrawerBody, DrawerContent, DrawerHeader, Flex, Input, VStack } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchUser } from '../actions/userActions';
 import Userloading from './UserLoading';

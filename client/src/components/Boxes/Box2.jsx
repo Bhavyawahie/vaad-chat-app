@@ -29,7 +29,7 @@ const Box2 = ({setSideBox}) => {
         setMessageField("")
     }
     useEffect(() => {
-        socket = io('http://localhost:4000')
+        socket = io()
         socket.emit('setup', {id: userInfo.id, name: userInfo.name, email: userInfo.email})
         socket.on('connection', () => setchatConnected(true))
     }, [])
@@ -48,7 +48,6 @@ const Box2 = ({setSideBox}) => {
                 // NOTIFY THE USER BY UPDATING THE UNREAD CHAT (Add it to the chat model)
             } 
             else {
-                console.log(newRecievedMessage)
                 dispatch({
                     type: MESSAGE_ALL_LIST_SUCCESS,
                     payload: newRecievedMessage

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import { Flex, useDisclosure } from "@chakra-ui/react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import Box1 from "../components/Boxes/Box1"
 import Box2 from "../components/Boxes/Box2"
 import Box3 from "../components/Boxes/Box3"
@@ -13,7 +13,6 @@ const Chatscreen = ({ history }) => {
     const {isOpen, onOpen, onClose} = useDisclosure()
     const {isOpen: isOpenCreateChat, onOpen: onOpenCreateChat, onClose: onCloseCreateChat} = useDisclosure()
     const {isOpen: isOpenCreateGroupChat, onOpen: onOpenCreateGroupChat, onClose: onCloseCreateGroupChat} = useDisclosure()
-    const dispatch = useDispatch()
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
     useEffect(() => {
