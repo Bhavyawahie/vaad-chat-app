@@ -9,7 +9,7 @@ const server = http.createServer(app)
 const io = require('socket.io')(server, {
     pingTimeout: 60000,
     cors: {
-        origin: "https://vaad-chat-app.herokuapp.com/"
+        origin: "*"
     }
 })
 require('colors');
