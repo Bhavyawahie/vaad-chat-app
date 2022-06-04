@@ -16,7 +16,6 @@ require('colors');
 
 const connectDB = require('./config/db')
 
-const chats = require('./data/data')
 const userRoutes = require('./routes/userRoutes');
 const chatRoutes = require('./routes/chatRoutes')
 const messageRoutes = require('./routes/messageRoutes')
