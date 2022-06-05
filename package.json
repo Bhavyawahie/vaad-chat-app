@@ -1,6 +1,9 @@
 {
   "name": "vaad-chat-app",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.15.1"
+  },
   "description": "A Full Stack Chatting application made using MERN, Chakra Ui and Socket.io",
   "main": "server.js",
   "scripts": {
