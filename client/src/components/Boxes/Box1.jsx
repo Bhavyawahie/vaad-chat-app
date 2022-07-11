@@ -51,7 +51,7 @@ const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCrea
         dispatch({type: CHAT_CURRENT_SET, payload: chats.find(chat => chat._id === chatId)})
     }
     return (
-        <Box w="25%" minWidth='25%'>
+        <Box w="25%" minW='300px'>
                 {createChatError && (() => {
                     toast({position: "top-right", title: `${createChatError}`, status: "warning", isClosable: true, duration: "3000"}) 
                     dispatch({type: CHAT_ONETOONE_CREATE_RESET})
