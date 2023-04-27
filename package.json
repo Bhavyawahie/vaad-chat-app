@@ -2,7 +2,8 @@
   "name": "vaad-chat-app",
   "version": "1.0.0",
   "engines": {
-    "node": "16.15.1"
+    "node": "16.15.1",
+    "npm": "8.11.0"
   },
   "description": "A Full Stack Chatting application made using MERN, Chakra Ui and Socket.io",
   "main": "server.js",
@@ -15,7 +16,6 @@
     "build:client": "npm install --prefix client && npm run build --prefix client",
     "build":" npm run build:client "
   },
-  "engines":"16.15.1",
   "author": "Bhavya Wahie",
   "license": "ISC",
   "dependencies": {
