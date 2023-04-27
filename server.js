@@ -52,7 +52,7 @@ app.use(errorHandler)
 const PORT = process.env.PORT || 4000
 
 server.listen(PORT, () => {
-    console.log(`Server started running at http://localhost:${PORT}`.yellow.inverse);
+    console.log(`Server started running at ${PORT}`.yellow.inverse);
 })
 
 io.on('connection', (socket) => {
