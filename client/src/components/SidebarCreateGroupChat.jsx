@@ -19,6 +19,7 @@ const SidebarCreateGroupChat = ({isOpenCreateGroupChat, onCloseCreateGroupChat})
     const [groupParticipants, setGroupParticipants] = useState([])
     const dispatch = useDispatch()
     const userSearch = useSelector(state => state.userSearch)
+    // eslint-disable-next-line no-unused-vars
     const { loading, users, error } = userSearch 
     const inputHandler = (e) => {
         setSearch(e.target.value)
@@ -59,7 +60,7 @@ const SidebarCreateGroupChat = ({isOpenCreateGroupChat, onCloseCreateGroupChat})
         } else{
             dispatch({type: USER_SEARCH_RESET})
         }
-    }, [search])
+    }, [dispatch, search])
     // useEffect(() => {
     //     console.log(groupParticipants)
     // }, [groupParticipants])
