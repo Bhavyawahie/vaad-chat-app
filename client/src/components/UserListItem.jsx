@@ -2,7 +2,6 @@ import React from 'react'
 import { Avatar, Box, Flex, Text } from '@chakra-ui/react'
 
 const UserListItem = ({initiateChat, user}) => {
-    // eslint-disable-next-line no-unused-vars
     const {_id, name, email, displayPicture} = user
     return (
             <Flex w='100%' px={3} py={.5} flexDirection='row' borderRadius='10px' _hover={{backgroundColor: "#EDF2F7"}} onClick={() => initiateChat(user)}>

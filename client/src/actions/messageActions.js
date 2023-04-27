@@ -1,6 +1,6 @@
 import axios from "axios"
 import { socket } from "../components/Boxes/Box2"
-import { MESSAGE_ALL_LIST_FAIL, MESSAGE_ALL_LIST_REQUEST, MESSAGE_ALL_LIST_SUCCESS, MESSAGE_SEND_FAIL, MESSAGE_SEND_SUCCESS } from "../constants/messageConstants"
+import { MESSAGE_ALL_LIST_FAIL, MESSAGE_ALL_LIST_REQUEST, MESSAGE_ALL_LIST_SUCCESS, MESSAGE_SEND_FAIL, MESSAGE_SEND_REQUEST, MESSAGE_SEND_SUCCESS } from "../constants/messageConstants"
 
 export const fetchAllMessages = (chatId) => async (dispatch, getState) => {
     try {

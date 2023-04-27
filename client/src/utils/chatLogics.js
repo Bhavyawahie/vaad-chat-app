@@ -9,9 +9,7 @@ export const getReciever = (loggedUser, chatUsers) => {
 export const isSameSenderMargin = (messages, m, i, loggedUserId) => {
     if (i < messages.length - 1 && messages[i + 1].sender._id === m.sender._id && messages[i].sender._id !== loggedUserId) {
         return 0
-    } 
-    //eslint-disable-next-line no-mixed-operators
-    else if (i < messages.length - 1 && messages[i + 1].sender._id !== m.sender._id && messages[i].sender._id !== loggedUserId || (i === messages.length - 1 && messages[i].sender._id !== loggedUserId) ) {
+    } else if (i < messages.length - 1 && messages[i + 1].sender._id !== m.sender._id && messages[i].sender._id !== loggedUserId || (i === messages.length - 1 && messages[i].sender._id !== loggedUserId) ) {
         return 0
     } else {
         return "auto"

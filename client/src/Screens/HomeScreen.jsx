@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Header from '../components/Header'
-import { Box, Button, Container, Flex, Heading, Image, Input, Spacer, useToast, VStack } from '@chakra-ui/react'
+import { Box, Button, Container, Flex, Heading, Image, Input, Spacer, Stack, useToast, VStack } from '@chakra-ui/react'
 import image from '../image.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../actions/userActions'

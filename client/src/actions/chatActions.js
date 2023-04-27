@@ -73,7 +73,6 @@ export const fetchAllChats = (search) => async (dispatch, getState) => {
             if(search !== ""){
                 return chat.isGroupChat ? chat.chatName.toLowerCase().includes(search.trim().toLowerCase()) : getReciever(userInfo, chat.users).name.toLowerCase().includes(search.trim().toLowerCase())
             }
-            return undefined
         })
         if(search === ""){
             dispatch({

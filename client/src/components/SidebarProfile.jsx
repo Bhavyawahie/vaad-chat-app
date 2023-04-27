@@ -12,7 +12,6 @@ const Sidebarprofile = ({isOpen, onClose}) => {
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
     const userDisplayPictureUpdate = useSelector(state => state.userDisplayPictureUpdate)
-    //eslint-disable-next-line no-unused-vars
     const {loading, success, error} = userDisplayPictureUpdate
     const uploadImageHandler = (picture) => {
         dispatch(updateDisplayPicture(picture))

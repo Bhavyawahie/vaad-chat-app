@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Container, Flex, Spacer } from '@chakra-ui/react'
 import ScrollableFeed from 'react-scrollable-feed'
 import { isSameSenderMargin } from '../utils/chatLogics'
 

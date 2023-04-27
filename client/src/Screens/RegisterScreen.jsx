@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Box, Button, Container, Flex, Heading,  Image,  Input, InputGroup, InputRightElement, Spacer, VStack, useToast } from '@chakra-ui/react'
+import { Box, Button, Container, Flex, Heading,  Image,  Input, InputGroup, InputRightElement, Spacer, VStack, useToast, position } from '@chakra-ui/react'
 import {ViewIcon, ViewOffIcon} from '@chakra-ui/icons'
 import Header from '../components/Header'
 import image2 from '../image2.png'
@@ -15,9 +15,7 @@ const RegisterScreen = ({history, location}) => {
     })
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-    // eslint-disable-next-line no-unused-vars
     const [visibleButton, setVisibleButton] = useState(false)
-    // eslint-disable-next-line no-unused-vars
     const [visibleButton_2, setVisibleButton_2] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState("")
     const dispatch = useDispatch()
