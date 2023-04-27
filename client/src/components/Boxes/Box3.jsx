@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, Box, Button, DrawerHeader, Flex, Heading, IconButton,Text } from '@chakra-ui/react'
+import { Avatar, Box, Flex, IconButton,Text } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CloseIcon } from '@chakra-ui/icons'
 import { getReciever } from '../../utils/chatLogics'

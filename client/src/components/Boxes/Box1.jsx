@@ -13,6 +13,7 @@ import { MESSAGE_ALL_LIST_RESET } from '../../constants/messageConstants'
 import { Link } from 'react-router-dom'
 import groupIcon from '../../img/groupIcon.png'
 
+// eslint-disable-next-line no-unused-vars
 const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCloseCreateChat, isOpenCreateGroupChat, onOpenCreateGroupChat, onCloseCreateGroupChat}) => {
     const githubLink = 'https://www.github.com/bhavyawahie'
     const toast = useToast()
@@ -22,10 +23,13 @@ const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCrea
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
     const chatAllList = useSelector(state => state.chatAllList)
+    // eslint-disable-next-line no-unused-vars
     const { loading, chats, error } = chatAllList
     const chatOneToOneCreate = useSelector(state => state.chatOneToOneCreate)
+    // eslint-disable-next-line no-unused-vars
     const {loading: createChatLoading, chat: createdChat, error: createChatError} = chatOneToOneCreate
     const chatGroupCreate = useSelector(state => state.chatGroupCreate)
+    // eslint-disable-next-line no-unused-vars
     const {loading: createGroupChatLoading, chat: createdGroupChat, error: createGroupChatError} = chatGroupCreate 
     const messageSend = useSelector(state => state.messageSend)
     const { message } = messageSend
