@@ -29,7 +29,7 @@ const Box2 = ({setSideBox}) => {
         setMessageField("")
     }
     useEffect(() => {
-        socket = io('https://vaad-chat-app.herokuapp.com/')
+        socket = io('https://vaad-chat-app.herokuapp.com')
         socket.emit('setup', {id: userInfo.id, name: userInfo.name, email: userInfo.email})
         socket.on('connection', () => setchatConnected(true))
     }, [])
@@ -57,7 +57,7 @@ const Box2 = ({setSideBox}) => {
     }, [])
     
     return (
-        <Box bg="white" w="75%" minWidth="50%" borderLeft="1px solid rgb(229,229,229)">
+        <Box bg="white" w="75%" borderLeft="1px solid rgb(229,229,229)">
                 { currentChat ? (
                 <Flex flexDirection="column" justifyContent='stretch' height='100vh'>
                     <Flex flexDirection="row" justifyContent="flex-start" borderBottom='1px solid rgb(229,229,229)' py={3}>

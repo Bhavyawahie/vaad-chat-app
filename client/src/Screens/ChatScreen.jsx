@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
-import { Flex, useDisclosure } from "@chakra-ui/react"
+import { Flex, useDisclosure, useMediaQuery } from "@chakra-ui/react"
 import { useSelector } from "react-redux"
 import Box1 from "../components/Boxes/Box1"
 import Box2 from "../components/Boxes/Box2"

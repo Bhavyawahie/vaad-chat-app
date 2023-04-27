@@ -23,7 +23,7 @@ const Sidebarprofile = ({isOpen, onClose}) => {
             onClose={onClose}
             size='sm'
             >
-            <DrawerContent shadow="none" w='25%' maxW='25%'>
+            <DrawerContent shadow="none" w='25%' maxW='430px'>
             {error && (() => {
                     toast({position: "top-right", title: `${error}`, status: "error", isClosable: true, duration: "3000"}) 
                     dispatch({type: USER_DISPLAYPICTURE_UPDATE_RESET})
