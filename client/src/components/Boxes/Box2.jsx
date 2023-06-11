@@ -33,7 +33,7 @@ const Box2 = ({setSideBox}) => {
         setMessageField("")
     }
     useEffect(() => {
-        socket = io('http://127.0.0.1:3000')
+        socket = io('https://vaad-chat-app-production.up.railway.app/chats')
         socket.emit('setup', {id: userInfo.id, name: userInfo.name, email: userInfo.email})
         socket.on('connection', () => setchatConnected(true))
     }, [userInfo])
