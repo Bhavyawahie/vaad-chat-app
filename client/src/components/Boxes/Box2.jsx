@@ -33,7 +33,7 @@ const Box2 = ({setSideBox}) => {
         setMessageField("")
     }
     useEffect(() => {
-        socket = io('https://jittery-office.onrender.com/chats')
+        socket = io('https://jittery-office.onrender.com/')
         socket.emit('setup', {id: userInfo.id, name: userInfo.name, email: userInfo.email})
         socket.on('connection', () => setchatConnected(true))
     }, [userInfo])
