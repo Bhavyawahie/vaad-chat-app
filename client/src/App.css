@@ -68,3 +68,8 @@ input[type='file']{
 .selectedChat {
   background-color: #FF5C87;
 }
+
+.picker-container {
+  position: absolute; 
+  bottom: 60px;
+}

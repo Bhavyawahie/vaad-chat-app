@@ -1,6 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon'
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
 import { Avatar, Box, Button, Flex, Icon, Input, Text } from '@chakra-ui/react'
 import {MESSAGE_ALL_LIST_SUCCESS} from '../../constants/messageConstants'
 import { fetchAllMessages, sendMessage } from '../../actions/messageActions'
@@ -14,6 +16,8 @@ let socket, selectedChatCompare
 const Box2 = ({setSideBox}) => {
     // eslint-disable-next-line no-unused-vars
     const groupChatImgURL = `https://nirc.icai.org/wp-content/plugins/profilegrid-user-profiles-groups-and-communities/public/partials/images/default-group.png`
+    const ref = useRef(null)
+    const [showEmoji, setShowEmoji] = useState(false)
     const [messageField, setMessageField] = useState("")
     // eslint-disable-next-line no-unused-vars
     const [chatConnected, setchatConnected] = useState(false)
@@ -79,8 +83,9 @@ const Box2 = ({setSideBox}) => {
                     </Flex>
                     <Flex flexDirection='column' justifyContent='flex-end' mb={3} maxH='70px'>
                         <Flex px={2}>
-                            <Button variant='flushed' _hover={{backgroundColor: "rgba(229,229,229)"}}><Icon as={InsertEmoticonIcon}/></Button>
-                            <Input autoFocus={true} placeholder="Type a Message" borderRadius='25px' w='90%' value={messageField} onChange={(e) => setMessageField(e.target.value)} onKeyPress={(e) => (messageField.trim() !== ""  && e.key === 'Enter') && sendMessageHandler()}/>
+                            {showEmoji && <div className='picker-container'><Picker data={data} theme={`light`} onEmojiSelect={(d) => {setMessageField(messageField + d.native); ref.current.focus();}} onClickOutside={() => {setShowEmoji(false); ref.current.focus();}} /></div>}
+                            <Button variant='flushed' _hover={{backgroundColor: "rgba(229,229,229)"}} onClick={() => {setShowEmoji(!showEmoji); ref.current.focus();}}><Icon as={InsertEmoticonIcon}/></Button>
+                            <Input ref={ref} autoFocus={true} placeholder="Type a Message" borderRadius='25px' w='90%' value={messageField} onChange={(e) => setMessageField(e.target.value)} onKeyPress={(e) => (messageField.trim() !== ""  && e.key === 'Enter') && sendMessageHandler()}/>
                             <Button ml={1} onClick={sendMessageHandler} disabled={(messageField === "" || messageField.trim() === "")} >Send</Button>
                         </Flex>
                     </Flex>
