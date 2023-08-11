@@ -5,17 +5,7 @@ const Userloading = () => {
     return (
         <Container my={5}>
             <Stack>
-                <Skeleton height='40px' />
-                <Skeleton height='40px' />
-                <Skeleton height='40px' />
-                <Skeleton height='40px' />
-                <Skeleton height='40px' />
-                <Skeleton height='40px' />
-                <Skeleton height='40px' />
-                <Skeleton height='40px' />
-                <Skeleton height='40px' />
-                <Skeleton height='40px' />
-                <Skeleton height='40px' />
+                {[...Array(40).keys()].map(() => <Skeleton height="40px"/>)}
             </Stack>
         </Container>
     )
