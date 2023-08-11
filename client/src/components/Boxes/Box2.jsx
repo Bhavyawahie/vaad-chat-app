@@ -63,8 +63,8 @@ const Box2 = ({setSideBox}) => {
     return (
         <Box bg="white" w="75%" borderLeft="1px solid rgb(229,229,229)">
                 { currentChat ? (
-                <Flex flexDirection="column" justifyContent='stretch' height='100vh'>
-                    <Flex flexDirection="row" justifyContent="flex-start" borderBottom='1px solid rgb(229,229,229)' py={3}>
+                <Flex flexDirection="column" justifyContent='space-between' height='100vh'>
+                    <Flex flexDirection="row" justifyContent="flex-start" borderBottom='1px solid rgb(229,229,229)' py={3} h="75px">
                             <Flex w='80%' ml={4} onClick={() => setSideBox(true) }>
                                 <Box>
                                     <Avatar src={currentChat.isGroupChat ? groupIcon : getReciever(userInfo, currentChat.users).displayPicture} boxSize="2.5rem" borderRadius="50%"></Avatar>
@@ -72,12 +72,12 @@ const Box2 = ({setSideBox}) => {
                                 <Text fontSize='lg' ml={3}>{  currentChat.isGroupChat ? currentChat.chatName : getReciever(userInfo, currentChat.users).name}</Text>
                             </Flex>
                     </Flex>
-                    <Flex height='83.4%' w='100%'>
-                        <Flex w="100%" h="100%" flexDirection='column' overflowY="hidden">
+                    <Flex w='100%' h='82vh' flexGrow='8'>
+                        <Flex w="100%" h='100%' flexDirection='column' overflowY="hidden">
                             {loadingMessage ? <MessageLoader/> : <MessageScrollList/>}
                         </Flex>
                     </Flex>
-                    <Flex flexDirection='column' justifyContent='flex-end' mb={3}>
+                    <Flex flexDirection='column' justifyContent='flex-end' mb={3} maxH='70px'>
                         <Flex px={2}>
                             <Button variant='flushed' _hover={{backgroundColor: "rgba(229,229,229)"}}><Icon as={InsertEmoticonIcon}/></Button>
                             <Input autoFocus={true} placeholder="Type a Message" borderRadius='25px' w='90%' value={messageField} onChange={(e) => setMessageField(e.target.value)} onKeyPress={(e) => (messageField.trim() !== ""  && e.key === 'Enter') && sendMessageHandler()}/>

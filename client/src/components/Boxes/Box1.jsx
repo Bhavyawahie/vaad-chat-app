@@ -92,7 +92,7 @@ const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCrea
                             <Input ref={localSearchInput} placeholder="Search" borderRadius="25px" onChange={(e) => setLocalSearch(e.target.value)}/>
                         </InputGroup>
                     </Container>
-                    <VStack spacing={0} mt={2} px={2} overflowY='scroll' height='82vh'>
+                    <VStack spacing={0} mt={2} px={2} overflowY='scroll' height='100vh'>
                             {loading ? <Userloading/> : (
                                 chats.map(chat => (
                                     <ChatListItem
