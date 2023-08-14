@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import image2 from '../image2.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../actions/userActions'
+import { USER_REGISTER_RESET } from '../constants/userConstants'
 
 const RegisterScreen = ({history, location}) => {
     const toast = useToast()
@@ -54,7 +55,7 @@ const RegisterScreen = ({history, location}) => {
     return (
         <>
             <Header location={location}/>
-            {error && toast({position: "top-right", title: `${error}`, status: "error", isClosable: true})}
+            {error && (() => {toast({position: "top-right", title: `${error}`, status: "error", isClosable: true}); dispatch({type: USER_REGISTER_RESET})})()}
             <Flex>
                 <Container maxW="container.xl" mt={4}>
                     <Flex mr={14}>
