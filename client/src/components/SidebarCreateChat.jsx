@@ -39,7 +39,7 @@ const SidebarCreateChat = ({isOpenCreateChat, onCloseCreateChat}) => {
             initialFocusRef={btnRef}
             size='sm'
             >
-            <DrawerContent shadow="none" w='25%' maxW='25%'>
+            <DrawerContent shadow="none" w='30%' maxW='30%'>
                 <DrawerHeader>
                     <Flex>
                         <Button variant="flushed" onClick={() => {onCloseCreateChat(); setSearch(""); dispatch({type: USER_SEARCH_RESET})}} _focus={{outline: "none"}}>

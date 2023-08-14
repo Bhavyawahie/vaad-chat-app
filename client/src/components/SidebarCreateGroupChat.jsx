@@ -74,7 +74,7 @@ const SidebarCreateGroupChat = ({isOpenCreateGroupChat, onCloseCreateGroupChat})
             size='sm'
             onOverlayClick={() => drawerResetHandler()}
             >
-            <DrawerContent shadow="none" w='25%' maxW='25%'>
+            <DrawerContent shadow="none" w='30%' maxW='30%'>
                     <DrawerHeader>
                         <Flex>
                             <Button variant="flushed" onClick={() => notSubmitted ? drawerResetHandler() : setNotSubmitted(true)} _focus={{outline: "none"}}>

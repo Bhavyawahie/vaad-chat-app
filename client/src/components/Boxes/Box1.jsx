@@ -12,6 +12,7 @@ import { getReciever } from '../../utils/chatLogics'
 import { MESSAGE_ALL_LIST_RESET } from '../../constants/messageConstants'
 import { Link } from 'react-router-dom'
 import groupIcon from '../../img/groupIcon.png'
+import { checkDate } from '../../utils/dateAndTimeFormater'
 
 // eslint-disable-next-line no-unused-vars
 const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCreateChat, onCloseCreateChat, isOpenCreateGroupChat, onOpenCreateGroupChat, onCloseCreateGroupChat}) => {
@@ -55,7 +56,7 @@ const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCrea
         dispatch({type: CHAT_CURRENT_SET, payload: chats.find(chat => chat._id === chatId)})
     }
     return (
-        <Box w="25%" minW='300px'>
+        <Box w="30%" minW="30%">
                 {createChatError && (() => {
                     toast({position: "top-right", title: `${createChatError}`, status: "warning", isClosable: true, duration: "3000"}) 
                     dispatch({type: CHAT_ONETOONE_CREATE_RESET})
@@ -101,7 +102,7 @@ const Box1 = ({setSideBox, isOpen, onOpen, onClose, isOpenCreateChat, onOpenCrea
                                         name={chat.isGroupChat ? chat.chatName : getReciever(userInfo, chat.users).name}
                                         displayPicture={chat.isGroupChat? groupIcon : getReciever(userInfo, chat.users).displayPicture}
                                         lastMessage={chat.lastMessage ? chat.isGroupChat ? `${chat.lastMessage.sender.name}: ${chat.lastMessage.content}`: chat.lastMessage.content : null}
-                                        timeStamp={chat.lastMessage ? chat.lastMessage.createdAt : ""}
+                                        timeStamp={chat.lastMessage ? checkDate(chat.lastMessage.createdAt) : ""}
                                         initiateChat={chatOpener}
                                         openContext={() => alert(`clicked (right)`)}
                                         bg={currentChat ? currentChat._id === chat._id ? '#cee5f2' : "#FFF" : ""}
