@@ -8,24 +8,19 @@ const Header = ({location}) => {
             <Container maxW='container.xl'>
                 <Flex>
                     <Box p={4} color='black' display='flex' alignItems='flex-end'>
-                        {/* <Image src={logo} boxSize='40px'/> */}
-                        <Heading as='h1' size='xl' pl={3}>Vaad</Heading>
+                        <Link to='/'>
+                            <Heading as='h1' size='xl' pl={3} bgGradient={'linear(to-t, cyan.600, cyan.100)'} bgClip='text' className='brand'>Vaad</Heading>
+                        </Link>
                     </Box>
                         <Spacer/>
-                    <Box p={4} display='flex'>
-                        {/* <Link to='#'>
-                            <Text ml={2} p={2}>Lorem</Text>
-                        </Link>
-                        <Link to='#'>
-                            <Text ml={2} p={2}>Ipsum</Text>
-                        </Link> */}
-                        <Link to='#'>
+                    {location.pathname === '/' && <Box p={4} display='flex'>
+                        <Link to='#privacy'>
                             <Text ml={2} p={2}>Privacy</Text>
                         </Link>
-                        <Link to={location.pathname === '/' ? '/register' : '/'}>
-                            <Button ml={2} p={2} variant='solid' bg='#0084FF' color='#FFFFFF'>{location.pathname === '/' ? "Register": "Login"}</Button>
+                        <Link to={location.pathname === '/' ? '/login' : '/'}>
+                            <Button ml={2} p={2} variant='solid' bg={'cyan.600'} color='#FFFFFF'>{location.pathname === '/' ? "Login": ""}</Button>
                         </Link>
-                    </Box>    
+                    </Box>}    
                 </Flex>
             </Container>
         </Flex>
