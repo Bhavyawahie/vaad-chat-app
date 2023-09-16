@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Button, Container, Flex, Heading, Spacer, Text } from '@chakra-ui/react'
+import { Box, Button, Container, Flex, Heading, Spacer, Text, useMediaQuery } from '@chakra-ui/react'
 
 const Header = ({location}) => {
+    const flag = ['/login', '/register'].includes(location.pathname)
+    const [isLargerThan1440] = useMediaQuery('(min-width: 1439px)')
     return (
-        <Flex boxShadow='sm'>
+        <Flex boxShadow={isLargerThan1440 ? '' :'sm'} position={flag && 'absolute'}>
             <Container maxW='container.xl'>
                 <Flex>
                     <Box p={4} color='black' display='flex' alignItems='flex-end'>
