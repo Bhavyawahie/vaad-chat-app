@@ -8,7 +8,7 @@ const GoogleSSO = () => {
         <Center py={8}>
             <Button w={'100%'}  variant={'outline'} leftIcon={<FontAwesomeIcon icon={faGoogle} />}>
                 <Center>
-                    <Text>Sign in with Google</Text>
+                    <Text>Continue with Google</Text>
                 </Center>
             </Button>
         </Center>
