@@ -2,23 +2,11 @@ import React from 'react'
 import Header from '../components/Header'
 import {
     Image,
-    Box,
-    Button,
-    Heading,
-    Container,
     Flex,
-    Text,
-    Stack,
-    Icon,
-    useColorModeValue,
-    createIcon,
     useMediaQuery
 } from '@chakra-ui/react'
 
 
-import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import LockIcon from '@mui/icons-material/Lock';
 import GridListLanding from '../components/GridListLanding'
 import HeroSection from '../components/HeroSection'
 import Features from '../components/Features'
