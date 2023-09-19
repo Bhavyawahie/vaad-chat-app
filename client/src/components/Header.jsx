@@ -6,7 +6,7 @@ const Header = ({location}) => {
     const flag = ['/login', '/register'].includes(location.pathname)
     const [isLargerThan1440] = useMediaQuery('(min-width: 1439px)')
     return (
-        <Flex boxShadow={isLargerThan1440 ? '' :'sm'} position={flag && 'absolute'}>
+        <Flex boxShadow={isLargerThan1440 ? '' :'sm'} w={isLargerThan1440 ? '' :'100%'} position={flag && 'absolute'}>
             <Container maxW='container.xl'>
                 <Flex>
                     <Box p={4} color='black' display='flex' alignItems='flex-end'>

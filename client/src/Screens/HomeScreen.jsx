@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Header from '../components/Header'
-import { AbsoluteCenter, Box, Button, Container, Divider, Flex, Heading, Image, Input, Spacer, useToast, Stack, FormControl, FormLabel, FormErrorMessage, useMediaQuery, Text } from '@chakra-ui/react'
+import { AbsoluteCenter, Box, Button, Container, Divider, Flex, Heading, Image, Input, Link as ChakraLink, Spacer, useToast, Stack, FormControl, FormLabel, FormErrorMessage, useMediaQuery, Text } from '@chakra-ui/react'
 import image from '../image.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../actions/userActions'
 import { USER_LOGIN_RESET } from '../constants/userConstants'
 import GoogleSSO from '../components/GoogleSSO'
+import {Link} from 'react-router-dom'
 
 
 const HomeScreen = ({ history, location }) => {
@@ -113,7 +114,7 @@ const HomeScreen = ({ history, location }) => {
     }, [userInfo, history]);
     return (
         <>
-            <Header location={location} w={!isLargerThan1440 && '100%'}/>
+            <Header location={location}/>
             {error && (() => {
                 toast({ position: "top-right", title: `${error}`, status: "error", isClosable: true, duration: "4000" })
                 dispatch({ type: USER_LOGIN_RESET })
@@ -146,6 +147,7 @@ const HomeScreen = ({ history, location }) => {
                                 <Button colorScheme={'cyan'} variant={'solid'} onClick={(e) => submitHandler(e)}>
                                     Sign in
                                 </Button>
+                                <Flex justify='center' color={'grey'}>Don't have an account?<Link to={'/register'}><ChakraLink color={'blackAlpha.800'}> &nbsp;Sign Up Now</ChakraLink></Link></Flex>
                             </Stack>
                         </Stack>
                     </Flex>
