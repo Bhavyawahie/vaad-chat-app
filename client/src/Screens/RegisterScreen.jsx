@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import {AbsoluteCenter, Box, Button, Container, Divider, Flex, Heading, Image, Input, Link as ChakraLink, Spacer, useToast, Stack, FormControl, FormLabel, FormErrorMessage, useMediaQuery, Text, InputGroup, InputRightElement } from '@chakra-ui/react'
+import {AbsoluteCenter, Box, Button, Divider, Flex, Heading, Image, Input, Link as ChakraLink, useToast, Stack, FormControl, FormLabel, FormErrorMessage, useMediaQuery, InputGroup, InputRightElement } from '@chakra-ui/react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import Header from '../components/Header'
 import { useDispatch, useSelector } from 'react-redux'

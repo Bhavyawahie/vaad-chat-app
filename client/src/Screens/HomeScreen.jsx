@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Header from '../components/Header'
-import { AbsoluteCenter, Box, Button, Container, Divider, Flex, Heading, Image, Input, Link as ChakraLink, Spacer, useToast, Stack, FormControl, FormLabel, FormErrorMessage, useMediaQuery, Text } from '@chakra-ui/react'
-import image from '../image.png'
+import { AbsoluteCenter, Box, Button,  Divider, Flex, Heading, Image, Input, Link as ChakraLink,  useToast, Stack, FormControl, FormLabel, FormErrorMessage, useMediaQuery } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../actions/userActions'
 import { USER_LOGIN_RESET } from '../constants/userConstants'
 import GoogleSSO from '../components/GoogleSSO'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 const HomeScreen = ({ history, location }) => {
@@ -24,6 +23,7 @@ const HomeScreen = ({ history, location }) => {
     const dispatch = useDispatch()
     const userLogin = useSelector(state => state.userLogin)
     const { loading, userInfo, error } = userLogin
+
     const changeHandler = (e) => {
         const { name, value } = e.target
         setInput(prevVal => {
@@ -38,30 +38,18 @@ const HomeScreen = ({ history, location }) => {
         const errorValidation = {
             email: true,
             password: true
-        };
+        }
 
-        // Validate email field
         if (!input.email) {
             errorValidation.email = false;
         }
 
-        // Validate password field
         if (!input.password) {
             errorValidation.password = false;
         }
 
         return errorValidation;
-    };
-
-    // const resetFormValidation = (e) => {
-    //     const [name] = e.target
-    //     setOnError(state => {
-    //         return {
-    //             ...state,
-    //             [name]: false
-    //         }
-    //     })
-    // }
+    }
 
 
     const submitHandler = (e) => {
@@ -88,19 +76,18 @@ const HomeScreen = ({ history, location }) => {
 
     useEffect(() => {
         const focusInput = () => {
-            // Use the current property of the ref to access the DOM element
             ref.current.focus();
         }
         focusInput();
-    }, []);
+    }, [])
 
     useEffect(() => {
-        if(input.email.length > 0) {
+        if (input.email.length > 0) {
             setOnError((state) => {
                 return { ...state, ['email']: false }
             })
         }
-        if(input.password.length > 0) {
+        if (input.password.length > 0) {
             setOnError((state) => {
                 return { ...state, ['password']: false }
             })
@@ -111,46 +98,47 @@ const HomeScreen = ({ history, location }) => {
         if (userInfo) {
             history.push('/chats')
         }
-    }, [userInfo, history]);
+    }, [userInfo, history])
+
     return (
         <>
-            <Header location={location}/>
+            <Header location={location} />
             {error && (() => {
                 toast({ position: "top-right", title: `${error}`, status: "error", isClosable: true, duration: "4000" })
                 dispatch({ type: USER_LOGIN_RESET })
             })()
             }
 
-            <Stack minH={'100vh'} direction={{ base: 'column', md: 'row'}} justify={!isLargerThan1440 && 'center'}>
+            <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }} justify={!isLargerThan1440 && 'center'}>
                 <Flex direction='column' w={'full'} maxW={'2xl'} p={8} flex={1} align={'center'} justify={'center'}>
-                        <Stack spacing={4} w={'full'} maxW={'md'}>
-                            <Heading fontSize={'4xl'}>Welcome back</Heading>
-                            <Heading fontSize={'md'}>Sign in to your account</Heading>
-                            <GoogleSSO />
-                            <Box position='relative'>
-                                <Divider />
-                                <AbsoluteCenter bg='white' color={"grey"} px='4'>
-                                    or
-                                </AbsoluteCenter>
-                            </Box>
-                            <FormControl id="email" isInvalid={onError.email}>
-                                <FormLabel>Email</FormLabel>
-                                <Input type="email" ref={ref} name='email' value={input.email} onChange={(e) => changeHandler(e)}/>  
-                                {onError.email && <FormErrorMessage>Email is required.</FormErrorMessage>}
-                            </FormControl>
-                            <FormControl id="password" isInvalid={onError.password}>
-                                <FormLabel>Password</FormLabel>
-                                <Input type="password" name='password' value={input.password} onChange={(e) => changeHandler(e)}/>
-                                {onError.password && <FormErrorMessage>Password is required.</FormErrorMessage>}
-                            </FormControl>
-                            <Stack spacing={6}>
-                                <Button colorScheme={'cyan'} variant={'solid'} onClick={(e) => submitHandler(e)}>
-                                    Sign in
-                                </Button>
-                                <Flex justify='center' color={'grey'}>Don't have an account?<Link to={'/register'}><ChakraLink color={'blackAlpha.800'}> &nbsp;Sign Up Now</ChakraLink></Link></Flex>
-                            </Stack>
+                    <Stack spacing={4} w={'full'} maxW={'md'}>
+                        <Heading fontSize={'4xl'}>Welcome back</Heading>
+                        <Heading fontSize={'md'}>Sign in to your account</Heading>
+                        <GoogleSSO />
+                        <Box position='relative'>
+                            <Divider />
+                            <AbsoluteCenter bg='white' color={"grey"} px='4'>
+                                or
+                            </AbsoluteCenter>
+                        </Box>
+                        <FormControl id="email" isInvalid={onError.email}>
+                            <FormLabel>Email</FormLabel>
+                            <Input type="email" ref={ref} name='email' value={input.email} onChange={(e) => changeHandler(e)} />
+                            {onError.email && <FormErrorMessage>Email is required.</FormErrorMessage>}
+                        </FormControl>
+                        <FormControl id="password" isInvalid={onError.password}>
+                            <FormLabel>Password</FormLabel>
+                            <Input type="password" name='password' value={input.password} onChange={(e) => changeHandler(e)} />
+                            {onError.password && <FormErrorMessage>Password is required.</FormErrorMessage>}
+                        </FormControl>
+                        <Stack spacing={6}>
+                            <Button colorScheme={'cyan'} variant={'solid'} onClick={(e) => submitHandler(e)}>
+                                Sign in
+                            </Button>
+                            <Flex justify='center' color={'grey'}>Don't have an account?<Link to={'/register'}><ChakraLink color={'blackAlpha.800'}> &nbsp;Sign Up Now</ChakraLink></Link></Flex>
                         </Stack>
-                    </Flex>
+                    </Stack>
+                </Flex>
                 {isLargerThan1440 && <Flex flex={1}>
                     <Image
                         alt={'Login Image'}
