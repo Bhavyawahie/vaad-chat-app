@@ -38,7 +38,7 @@ const SocialButton = ({children,label,href,}) => {
     )
 }
 
-export default function SmallWithSocial() {
+const Footer = () => {
     const year = new Date().getFullYear()
     return (
         <Box
@@ -71,3 +71,5 @@ export default function SmallWithSocial() {
         </Box>
     )
 }
+
+export default Footer
