@@ -44,9 +44,25 @@ const fetchMessages = asyncHandler(async (req, res) => {
     }
 })
 
+//  @desc:     Get all the message from a chat
+//  @route:    PUT /api/messages/:chatId
+//  @access:   Protected
+
+const updateMessageReadStatus = asyncHandler(async (req, res) => {
+    const chatId = req.params.chatId
+    const response = await Message.updateMany({chat: chatId}, {
+        $set: {read: true}
+    })
+    if(!response.acknowledged) {
+        res.status(400).json('error: somthing went wrong')
+    }
+    res.status(200).json('message: read status updated successfully!')
+})
+
 
 
 module.exports = {
     sendMessage,
-    fetchMessages
+    fetchMessages,
+    updateMessageReadStatus
 }

@@ -1,5 +1,5 @@
 const express = require("express");
-const { fetchMessages, sendMessage } = require("../controllers/messageController");
+const { fetchMessages, sendMessage, updateMessageReadStatus } = require("../controllers/messageController");
 const { protect } = require("../middlewares/authMiddleware");
 const router = express.Router()
 
@@ -10,5 +10,6 @@ router
 router
     .route('/:chatId')
     .get(protect, fetchMessages)
+    .put(protect, updateMessageReadStatus)
 
 module.exports = router
