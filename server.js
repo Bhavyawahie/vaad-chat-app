@@ -3,13 +3,15 @@ const app = express()
 const http = require('http')
 const path = require('path')
 const fileUpload = require('express-fileupload')
-const dotenv = require('dotenv');
+const dotenv = require('dotenv')
 const morgan = require('morgan')
+const cors = require('cors')
 const server = http.createServer(app)
 const io = require('socket.io')(server, {
     pingTimeout: 60000,
     cors: {
-        origin: "*"
+        origin: "*",
+        methods: ["GET", "POST"]
     }
 })
 require('colors');
@@ -25,6 +27,7 @@ dotenv.config({path: './.env'})
 
 connectDB()
 
+app.use(cors())
 app.use(express.urlencoded({limit: '50mb', extended: true}))
 app.use(express.json({limit: '50mb'}))
 app.use(fileUpload())
@@ -86,6 +89,10 @@ io.on('connection', (socket) => {
             socket.in(user._id).emit('messageRecieved', message)
         })
 
+    })
+
+    socket.on('newChatCreated', () => {
+        console.log('new chat created')
     })
 
 })
